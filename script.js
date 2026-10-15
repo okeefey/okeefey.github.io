@@ -28,7 +28,7 @@
     setTimeout(function () { window.location.href = a.href; }, 520);
   });
 
-  // Reveal rows as they scroll into view
+  // Reveal rows as they scroll into view (project pages)
   var items = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && items.length) {
     var io = new IntersectionObserver(function (entries) {
@@ -41,20 +41,32 @@
     items.forEach(function (el) { el.classList.add("in"); });
   }
 
-  // Soft glow that follows the cursor on the home page
-  var glow = document.querySelector(".glow");
-  if (glow && !reduce && window.matchMedia("(hover: hover)").matches) {
-    var tx = 0, ty = 0, x = 0, y = 0, running = false;
-    window.addEventListener("mousemove", function (e) {
-      tx = e.clientX; ty = e.clientY;
-      if (!running) { running = true; requestAnimationFrame(tick); }
+  // Book home page: the right-hand plate follows the contents entry you point at
+  var toc = document.querySelector(".toc");
+  if (toc) {
+    var rows = toc.querySelectorAll("a[data-plate]");
+    var plates = document.querySelectorAll(".plate");
+    var pgno = document.querySelector(".pgno");
+    var single = window.matchMedia("(max-width: 820px), (hover: none)");
+
+    function show(id, idx) {
+      plates.forEach(function (p) { p.classList.toggle("on", p.id === id); });
+      rows.forEach(function (r) { r.classList.toggle("on", r.getAttribute("data-plate") === id); });
+      if (pgno && idx) pgno.textContent = "[ " + idx + " ]";
+    }
+    rows.forEach(function (r) {
+      var go = function () { if (!single.matches) show(r.getAttribute("data-plate"), r.getAttribute("data-idx")); };
+      r.addEventListener("mouseenter", go);
+      r.addEventListener("focus", go);
+      // About and Contact only change the page; on one-page layouts they scroll to their section instead
+      if (r.getAttribute("href").charAt(0) === "#") {
+        r.addEventListener("click", function (e) { if (!single.matches) { e.preventDefault(); go(); } });
+      }
     });
-    function tick() {
-      x += (tx - x) * 0.12; y += (ty - y) * 0.12;
-      glow.style.setProperty("--x", x + "px");
-      glow.style.setProperty("--y", y + "px");
-      if (Math.abs(tx - x) > 0.5 || Math.abs(ty - y) > 0.5) requestAnimationFrame(tick);
-      else running = false;
+    if (!single.matches) {
+      var start = document.querySelector(".plate.on");
+      var startRow = start && toc.querySelector('a[data-plate="' + start.id + '"]');
+      if (startRow) show(start.id, startRow.getAttribute("data-idx"));
     }
   }
 })();
