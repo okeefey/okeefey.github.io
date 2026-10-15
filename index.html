@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0f0b09">
+  <meta name="theme-color" content="#ffffff">
   <title>Owen O'Keefe | UX Designer</title>
   <meta name="description" content="Emerging UX designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.">
-  <link rel="preload" href="fonts/schibsted-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/schibsted-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="cabin.css">
+  <link rel="stylesheet" href="sheet.css">
   <script>
     document.documentElement.classList.add('js');
     try {
@@ -18,150 +18,124 @@
     } catch (e) {}
   </script>
 </head>
-<body class="cabin">
+<body class="sheet">
   <div class="wipe" aria-hidden="true"></div>
+  <main class="sheet-wrap" id="top">
+    <div class="s-top">
+      <nav aria-label="Sections"><a href="#work">Selected work</a><a href="#other">Other work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    </div>
 
-  <!-- shared drawings -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <defs>
-      <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-    </defs>
-  </svg>
+    <h1 class="s-title">Owen O’Keefe</h1>
+    <hr class="s-rule">
+    <p class="s-lede">Emerging UX Designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.</p>
 
-  <div class="stage">
-
-    <!-- ============ HERO SCENE ============ -->
-    <header class="scene" id="top">
-      <div class="floor" aria-hidden="true"></div>
-
-      <div class="idwrap">
-        <h1 class="idname">Owen O’Keefe</h1>
-        <nav class="mid-nav" aria-label="Sections">
-          <a href="#work">Selected work</a>
-          <a href="#other">Other work</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
+    
+    <section class="spread" aria-label="Contents">
+      <div class="page pl">
+        <p class="book-t">Owen O’Keefe’s Portfolio <span>a book of selected work</span></p>
+        <ol class="ix-list">
+          <li><a class="ix top" href="#about"><i>1.</i>About</a></li>
+          <li><a class="ix top" href="#work"><i>2.</i>Selected work</a>
+            <ol>
+              <li><a class="ix" href="bright-maps.html" data-wipe="#a6b8a7" data-img="img/bm-sketch.webp" data-n="(1 / 2)" data-name="Bright Maps" data-cap="Bright Maps, 2024" data-alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><i>2.1.</i>Bright Maps</a></li>
+              <li><a class="ix" href="focus-friend.html" data-wipe="#c4a0ac" data-img="img/focus-tile.webp" data-n="(2 / 2)" data-name="Focus Friend" data-cap="Focus Friend, 2025" data-alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><i>2.2.</i>Focus Friend</a></li>
+            </ol></li>
+          <li><a class="ix top" href="#other"><i>3.</i>Other work</a>
+            <ol>
+              <li><a class="ix" href="https://github.com/okeefey"><i>3.1.</i>Weather Tower</a></li>
+              <li><a class="ix" href="https://github.com/okeefey"><i>3.2.</i>MIDI Generator</a></li>
+            </ol></li>
+          <li><a class="ix top" href="#contact"><i>4.</i>Contact</a></li>
+        </ol>
       </div>
-
-      <div class="bigwin" aria-hidden="true">
-        <div class="glow"></div>
-        <div class="frameb">
-          <div class="glass"><canvas id="snow"></canvas>
-            <svg class="hills" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0 12 C14 6 30 11 46 8 C64 5 80 11 100 7 V20 H0 Z" fill="#dfe7ef"/></svg>
-            <i class="bar bh"></i>
-          </div>
-        </div>
-        <div class="sill"></div>
-      </div>
-      <!-- hanging lantern -->
-      <div class="obj obj-lantern" style="--d:6" aria-hidden="true">
-        <div class="swing">
-          <div class="chain"></div>
-          <svg viewBox="0 0 60 110" overflow="visible">
-            <circle class="lglow" cx="30" cy="62" r="46" fill="#f2a33c" opacity=".28" filter="url(#soft)"/>
-            <circle cx="30" cy="9" r="6" fill="none" stroke="#1d1511" stroke-width="3"/>
-            <path d="M14 32 L22 18 H38 L46 32 Z" fill="#1d1511"/>
-            <rect x="16" y="32" width="28" height="52" fill="#f0b052"/>
-            <path d="M30 40 C36 52 38 58 36 68 C35 76 32 78 30 78 C28 78 25 76 24 68 C22 58 26 52 30 40 Z" fill="#fbe0a0"/>
-            <rect x="15" y="32" width="3" height="52" fill="#1d1511"/>
-            <rect x="29" y="32" width="2" height="52" fill="#1d1511" opacity=".55"/>
-            <rect x="42" y="32" width="3" height="52" fill="#1d1511"/>
-            <path d="M12 84 H48 L44 96 H16 Z" fill="#1d1511"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- small round table with a steaming mug -->
-      <div class="obj obj-table" style="--d:3" aria-hidden="true">
-        <svg viewBox="0 0 160 210">
-          <path d="M74 126 H86 V190 H74 Z" fill="#5a3a26"/>
-          <ellipse cx="80" cy="194" rx="36" ry="8" fill="#4a3020"/>
-          <ellipse cx="80" cy="124" rx="68" ry="13" fill="#4a3020"/>
-          <ellipse cx="80" cy="119" rx="68" ry="13" fill="#86603f"/>
-          <path d="M96 86 C112 84 112 104 96 104" fill="none" stroke="#c85a4c" stroke-width="6" stroke-linecap="round"/>
-          <path d="M56 78 H98 V108 C98 116 92 120 78 120 C62 120 56 116 56 108 Z" fill="#c85a4c"/>
-          <ellipse cx="77" cy="78" rx="21" ry="5" fill="#4b2f22"/>
-          <rect x="60" y="92" width="34" height="4" fill="#efe3cc" opacity=".55"/>
-        </svg>
-        <span class="steam" style="--x:-8px;--t:4.6s;--d:0s"></span>
-        <span class="steam" style="--x:6px;--t:5.2s;--d:1.4s"></span>
-        <span class="steam" style="--x:-2px;--t:4.9s;--d:2.8s"></span>
-      </div>
-
-      
-    </header>
-
-    <!-- ============ SELECTED WORK ============ -->
-    <section class="s-work" id="work" aria-labelledby="work-h">
-      <h2 id="work-h">Selected work</h2>
-      <div class="frames">
-        <article class="fwrap reveal">
-          <a class="frame" href="bright-maps.html" data-wipe="#a6b8a7" style="--tilt:-0.9deg" aria-label="Open the Bright Maps case study">
-            <span class="fin">
-              <img src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map">
-              <span class="fdim"></span>
-              <span class="fname"><b>Bright Maps</b><i>Open the case study</i></span>
-            </span>
-          </a>
-          <p class="fcap"><b>Bright Maps</b> Civic platform where residents vote on local services.</p>
-          <p class="fmeta">Team of 3 | Sept - Dec 2024 | Prototyping + User Interviews</p>
-        </article>
-
-        <article class="fwrap reveal">
-          <a class="frame" href="focus-friend.html" data-wipe="#c4a0ac" style="--tilt:0.8deg" aria-label="Open the Focus Friend case study">
-            <span class="fin">
-              <img src="img/focus-cover.webp" alt="Focus Friend app cover with a grey 3D pet and a focus streak card">
-              <span class="fdim"></span>
-              <span class="fname"><b>Focus Friend</b><i>Open the case study</i></span>
-            </span>
-          </a>
-          <p class="fcap"><b>Focus Friend</b> Gamified focus app using a pet's mood and time debt to curb phone distraction, built on the CREATE behaviour-change model.</p>
-          <p class="fmeta">Team of 3 | Oct - Dec 2025 | Figma</p>
-        </article>
+      <div class="page pr">
+        <span class="pg-n" id="pgn">(1 / 2)</span>
+        <a class="pic book-pic" id="bookpic" href="bright-maps.html" data-wipe="#a6b8a7" aria-label="Open the Bright Maps case study">
+          <span class="box"><img id="bookimg" src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm" id="booknm">Bright Maps<i>Open the case study</i></span></span>
+        </a>
+        <p class="book-cap" id="bookcap">Bright Maps, 2024</p>
       </div>
     </section>
 
-    <!-- ============ OTHER WORK ============ -->
-    <section class="s-other" id="other" aria-labelledby="other-h">
-      <h2 id="other-h">Other work</h2>
-      <ul class="orows">
-        <li>
-          <a href="https://github.com/okeefey" target="_blank" rel="noopener">
-            <b>Weather Tower</b>
-            <span>Tower defense game with dynamic weather systems, built in Godot (UVic Game Development Club, 2024-25)</span>
-            <em>Link</em>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/okeefey" target="_blank" rel="noopener">
-            <b>MIDI Generator using deep learning</b>
-            <span></span>
-            <em>Link</em>
-          </a>
-        </li>
-      </ul>
-    </section>
+    <h2 class="s-h" id="work">Selected work</h2>
+    <p class="s-sub">hover a drawing to peek</p>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="s-about" id="about" aria-labelledby="about-h">
-      <h2 id="about-h">About</h2>
+    <article class="proj reveal">
+      <h3 class="proj-name">Bright Maps</h3>
+      <div class="proj-grid">
+        <div>
+          <a class="pic" href="bright-maps.html" data-wipe="#a6b8a7" aria-label="Open the Bright Maps case study">
+            <span class="box"><img src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm">Bright Maps<i>Open the case study</i></span></span>
+          </a>
+          <p class="cap">wireframe sketch, reporting form</p>
+        </div>
+        <div class="txt">
+          <h3>Overview</h3>
+          <p>Civic platform where residents vote on local services.</p>
+          <div class="proj-facts"><div><b>Timeline</b>Sept - Dec 2024</div><div><b>Team</b>Team of 3</div><div><b>Method</b>Prototyping + User Interviews</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj flip reveal">
+      <h3 class="proj-name">Focus Friend</h3>
+      <div class="proj-grid">
+        <div class="txt">
+          <h3>Overview</h3>
+          <p>Gamified focus app using a pet's mood and time debt to curb phone distraction, built on the CREATE behaviour-change model.</p>
+          <div class="proj-facts"><div><b>Timeline</b>Oct - Dec 2025</div><div><b>Team</b>Team of 3</div><div><b>Tools</b>Figma</div></div>
+        </div>
+        <div>
+          <a class="pic" href="focus-friend.html" data-wipe="#c4a0ac" aria-label="Open the Focus Friend case study">
+            <span class="box"><img src="img/focus-tile.webp" alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><span class="dim"></span><span class="nm">Focus Friend<i>Open the case study</i></span></span>
+          </a>
+          <p class="cap">app cover, pet and focus streak</p>
+        </div>
+      </div>
+    </article>
+
+    <h2 class="s-h" id="other">Other work</h2>
+    <ul class="rows">
+      <li><a href="https://github.com/okeefey"><b>Weather Tower</b><span>Tower defense game with dynamic weather systems, built in Godot (UVic Game Development Club, 2024-25)</span><em>Link ↗</em></a></li>
+      <li><a href="https://github.com/okeefey"><b>MIDI Generator</b><span>Using deep learning</span><em>Link ↗</em></a></li>
+    </ul>
+
+    <h2 class="s-h" id="about">About</h2>
+    <div class="cols">
       <p>Emerging UX designer pursuing a Master of Information in User Experience Design at the University of Toronto, with a background in psychology and computer science.</p>
       <p>I enjoy usability testing, prototyping, and human-centered design, and I want to bring research-grounded design thinking to a UX or product design team.</p>
-    </section>
+    </div>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="s-contact" id="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">Contact</h2>
-      <p><a href="mailto:okeefeowen1@gmail.com">okeefeowen1@gmail.com</a></p>
-      <p><a href="https://linkedin.com/in/owenokeefe1" target="_blank" rel="noopener">linkedin.com/in/owenokeefe1</a></p>
-      <p><a href="https://github.com/okeefey" target="_blank" rel="noopener">github.com/okeefey</a></p>
-      <p class="fine">built in 2026</p>
-    </section>
+    <h2 class="s-h" id="contact">Contact</h2>
+    <div class="s-facts" style="border-bottom:0;margin-top:26px">
+      <div><b>Email</b><a href="mailto:okeefeowen1@gmail.com">okeefeowen1@gmail.com</a></div>
+      <div><b>LinkedIn</b><a href="https://linkedin.com/in/owenokeefe1">linkedin.com/in/owenokeefe1</a></div>
+      <div><b>GitHub</b><a href="https://github.com/okeefey">github.com/okeefey</a></div>
+    </div>
 
-  </div>
+    <div class="s-foot"><span>Owen O’Keefe</span><span>built in 2026</span></div>
+  </main>
 
   <script src="script.js"></script>
-  <script src="cabin.js"></script>
+
+  <script>
+    (function () {
+      var img = document.getElementById("bookimg"), cap = document.getElementById("bookcap"), nm = document.getElementById("booknm"), pic = document.getElementById("bookpic");
+      var links = document.querySelectorAll(".ix[data-img]"), cache = [];
+      links.forEach(function (a) { var i = new Image(); i.src = a.dataset.img; cache.push(i); });
+      function show(a) {
+        if (img.getAttribute("src") === a.dataset.img) return;
+        img.style.opacity = 0;
+        setTimeout(function () {
+          img.src = a.dataset.img; img.alt = a.dataset.alt; cap.textContent = a.dataset.cap; document.getElementById("pgn").textContent = a.dataset.n;
+          nm.firstChild.nodeValue = a.dataset.name; pic.href = a.href; pic.setAttribute("data-wipe", a.getAttribute("data-wipe"));
+          pic.setAttribute("aria-label", "Open the " + a.dataset.name + " case study"); img.style.opacity = 1;
+        }, 160);
+        document.querySelectorAll(".ix.on").forEach(function (x) { x.classList.remove("on"); }); a.classList.add("on");
+      }
+      links.forEach(function (a) { a.addEventListener("mouseenter", function () { show(a); }); a.addEventListener("focus", function () { show(a); }); });
+      if (links[0]) links[0].classList.add("on");
+    })();
+  </script>
 </body>
 </html>

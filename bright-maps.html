@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bright Maps | Owen O'Keefe</title>
   <meta name="description" content="Bright Maps: a civic platform where residents vote on how well local services perform.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="project.css">
   <script>
     document.documentElement.classList.add('js');
     try {
@@ -16,19 +13,17 @@
       if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
     } catch (e) {}
   </script>
-  <style>
-    body.project { --bg: #a6b8a7; --row: #f5e4e4; --pill: #c9a0a4; color: #1d2520; }
-  </style>
 </head>
-<body class="project">
+<body class="proj">
   <div class="wipe" aria-hidden="true"></div>
 
   <main class="wrap">
-    <a class="back" href="index.html" data-wipe="#2d211a">Home</a>
+    <div class="s-top"><a href="index.html" data-wipe="#ffffff">← Home</a><a href="focus-friend.html" data-wipe="#ffffff">Next project →</a></div>
 
     <header class="phead">
-      <h1 class="ptitle bm-title">Bright Maps</h1>
-      <p class="psub">Social-sourced data: mapping community needs</p>
+      <h1 class="s-title">Bright Maps</h1>
+      <hr class="s-rule">
+      <p class="s-lede">Social-sourced data: mapping community needs</p>
     </header>
 
     <dl class="facts">
@@ -98,7 +93,7 @@
       </div>
     </section>
 
-    <a class="next" href="focus-friend.html" data-wipe="#c4a0ac"><small>Next project</small>Focus Friend</a>
+    <a class="next" href="focus-friend.html" data-wipe="#ffffff"><small>Next project</small>Focus Friend</a>
   </main>
 
   <script src="script.js"></script>
