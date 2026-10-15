@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owen O'Keefe | UX Designer</title>
+  <meta name="description" content="Emerging UX designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      var c = sessionStorage.getItem('wipe');
+      if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="wipe" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="hero">
+      <h1>
+        <span class="mask d1"><span>Hi, I'm Owen.</span></span>
+      </h1>
+      <p class="lede">
+        <span class="mask d2"><span>Emerging UX Designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.</span></span>
+      </p>
+      <span class="mask d3"><span><a class="btn" href="#work">View my work</a></span></span>
+    </header>
+
+    <section id="work" aria-labelledby="work-h">
+      <h2 class="sec" id="work-h">Selected work</h2>
+      <div class="tiles">
+        <article>
+          <a class="tile" href="bright-maps.html" data-wipe="#a6b8a7" aria-label="Bright Maps case study">
+            <img src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map" loading="eager">
+            <span class="name"><b>Bright Maps</b><i>View case study</i></span>
+          </a>
+          <p class="cap">Civic platform where residents vote on local services.</p>
+          <p class="meta-line">Team of 3 | Sept - Dec 2024 | Prototyping + User Interviews</p>
+        </article>
+
+        <article>
+          <a class="tile" href="focus-friend.html" data-wipe="#c4a0ac" aria-label="Focus Friend case study">
+            <img src="img/focus-cover.webp" alt="Focus Friend app cover with a grey 3D pet and a focus streak card">
+            <span class="name"><b>Focus Friend</b><i>View case study</i></span>
+          </a>
+          <p class="cap">Gamified focus app using a pet's mood and time debt to curb phone distraction, built on the CREATE behaviour-change model.</p>
+          <p class="meta-line">Team of 3 | Oct - Dec 2025 | Figma</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="other-h">
+      <h2 class="sec" id="other-h">Other work</h2>
+      <ul class="list">
+        <li>
+          <a href="https://github.com/okeefey" target="_blank" rel="noopener">
+            <b>Weather Tower</b>
+            <span>Tower defense game with dynamic weather systems, built in Godot (UVic Game Development Club, 2024-25)</span>
+            <em>Link</em>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/okeefey" target="_blank" rel="noopener">
+            <b>MIDI Generator using deep learning</b>
+            <span></span>
+            <em>Link</em>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="about" aria-labelledby="about-h">
+      <h2 class="sec" id="about-h">About</h2>
+      <p>Emerging UX designer pursuing a Master of Information in User Experience Design at the University of Toronto, with a background in psychology and computer science.</p>
+      <p>I enjoy usability testing, prototyping, and human-centered design, and I want to bring research-grounded design thinking to a UX or product design team.</p>
+    </section>
+
+    <section class="contact" aria-labelledby="contact-h">
+      <h2 class="sec" id="contact-h">Contact</h2>
+      <p>
+        <a class="ul" href="mailto:okeefeowen1@gmail.com">okeefeowen1@gmail.com</a>
+        <a class="ul" href="https://linkedin.com/in/owenokeefe1" target="_blank" rel="noopener">linkedin.com/in/owenokeefe1</a>
+        <a class="ul" href="https://github.com/okeefey" target="_blank" rel="noopener">github.com/okeefey</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

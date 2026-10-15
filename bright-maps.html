@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bright Maps | Owen O'Keefe</title>
+  <meta name="description" content="Bright Maps: a civic platform where residents vote on how well local services perform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      var c = sessionStorage.getItem('wipe');
+      if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
+    } catch (e) {}
+  </script>
+  <style>
+    body.project { --bg: #a6b8a7; --row: #f5e4e4; --pill: #c9a0a4; color: #1d2520; }
+  </style>
+</head>
+<body class="project">
+  <div class="wipe" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <a class="back" href="index.html" data-wipe="#f8f8f3">Home</a>
+
+    <header class="phead">
+      <h1 class="ptitle bm-title">Bright Maps</h1>
+      <p class="psub">Social-sourced data: mapping community needs</p>
+    </header>
+
+    <dl class="facts">
+      <div><dt>Role</dt><dd>Team Member</dd></div>
+      <div><dt>Timeline</dt><dd>Sept - Dec 2024</dd></div>
+      <div><dt>Tools</dt><dd>Figma</dd></div>
+      <div><dt>Team</dt><dd>Team of 3</dd></div>
+    </dl>
+
+    <img class="shot" src="img/bm-map.webp" alt="Map of Victoria with colour-coded service zones in green, yellow and red">
+
+    <section class="row reveal" aria-label="Problem">
+      <h2>Problem</h2>
+      <p>Poor local services, such as late trash pickup, unmaintained roads, and weak public safety, frustrate residents and lower their quality of life.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Goal">
+      <h2>Goal</h2>
+      <p>A user-friendly platform where residents collectively vote on how well local services perform.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Research">
+      <h2>Research</h2>
+      <div>
+        <p>I reviewed similar interfaces, including crisis-mapping tools and government social media, then tested Figma prototypes with general and expert users.</p>
+        <p><strong>Findings:</strong></p>
+        <ul>
+          <li>Some users struggled with navigation and needed clearer guidance</li>
+          <li>The wireframes worked for a broad audience and felt simple</li>
+          <li>Visual layout and polish affected how usable the app felt</li>
+          <li>Expert users grasped the system quickly, which validated advanced features</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="row reveal" aria-label="Process">
+      <h2>Process</h2>
+      <div>
+        <p>Based on testing, we made these changes:</p>
+        <ul>
+          <li>Simplified navigation and added contextual tooltips for less tech-savvy users</li>
+          <li>Added a functional reporting feature and a user feedback mechanism</li>
+          <li>Unified the visual style for consistency</li>
+          <li>Made the interface fully responsive for mobile and desktop</li>
+          <li>Added customization options</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="row stack reveal" aria-label="Final design">
+      <h2>Final design</h2>
+      <figure class="figure">
+        <img src="img/bm-final.webp" alt="Three phone screens showing the report flow: choosing a category, rating, and typing a comment">
+        <figcaption>The final design centers on a map interface with a submission form, so reporting an issue takes little effort, including on the go.</figcaption>
+      </figure>
+    </section>
+
+    <section class="row plain reveal" aria-label="Outcome">
+      <h2>Outcome</h2>
+      <div>
+        <p>Five users rated task difficulty from 1 (low) to 5 (high). Nineteen of 20 ratings were 3 or lower.</p>
+        <ul>
+          <li>Flagging an area was slightly too difficult, so that flow needs another look</li>
+          <li>All users enjoyed the task; one called it an interesting use of social data, and one said they would not use the app personally</li>
+        </ul>
+        <img class="chart" src="img/bm-chart.webp" alt="Bar chart of user-reported difficulty from 1 to 5 across five users and four questions">
+      </div>
+    </section>
+
+    <a class="next" href="focus-friend.html" data-wipe="#c4a0ac"><small>Next project</small>Focus Friend</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

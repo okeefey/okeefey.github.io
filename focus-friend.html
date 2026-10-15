@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Friend | Owen O'Keefe</title>
+  <meta name="description" content="Focus Friend: a gamified focus app built on the CREATE behaviour-change model.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      var c = sessionStorage.getItem('wipe');
+      if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
+    } catch (e) {}
+  </script>
+  <style>
+    body.project { --bg: #c4a0ac; --row: #f5e4e4; --pill: #d9b3b8; color: #231a1e; }
+  </style>
+</head>
+<body class="project">
+  <div class="wipe" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <a class="back" href="index.html" data-wipe="#f8f8f3">Home</a>
+
+    <header class="phead">
+      <h1 class="ptitle">Focus Friend<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e0457b" d="M12 21s-7.5-4.6-9.6-9.2C.8 8.3 2.7 4.5 6.4 4.5c2.2 0 3.9 1.2 5.6 3.4 1.7-2.2 3.4-3.4 5.6-3.4 3.7 0 5.6 3.8 4 7.3C19.5 16.4 12 21 12 21z"/></svg></h1>
+      <p class="psub">Behavioural design app</p>
+    </header>
+
+    <dl class="facts">
+      <div><dt>Role</dt><dd>UX designer, user testing lead</dd></div>
+      <div><dt>Timeline</dt><dd>Oct - Dec 2025</dd></div>
+      <div><dt>Tools</dt><dd>Figma</dd></div>
+      <div><dt>Team</dt><dd>Team of 3</dd></div>
+    </dl>
+
+    <img class="shot" src="img/ff-hero.webp" alt="Phone screen showing a heart emotion bar, a study timer at 15:03 and time debt at 10:12">
+
+    <section class="row reveal" aria-label="Problem">
+      <h2>Problem</h2>
+      <p>Digital distraction pulls attention away from studying and working.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Goal">
+      <h2>Goal</h2>
+      <p>A gamified focus app, built on the CREATE behaviour-change model, that uses mindful nudges to keep you off your phone while you study.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Research">
+      <h2>Research</h2>
+      <div>
+        <p>The design is grounded in HCI course concepts:</p>
+        <p><strong>Findings:</strong></p>
+        <ul>
+          <li>Emotion and attachment: a pet whose mood reflects your behaviour</li>
+          <li>Attention and task-switching costs: time blocking and app redirection</li>
+          <li>Perception: a low-clutter interface so key actions stand out</li>
+          <li>Behaviour change: cues, habits, and accountability (CREATE)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="row reveal" aria-label="Process">
+      <h2>Process</h2>
+      <div>
+        <p>Key features and why they exist:</p>
+        <ul>
+          <li>Physical pet and emotion bar: emotional attachment nudges you to stay on task; its mood rises when you finish a session and drops when you fail</li>
+          <li>App usage tracking: a sound plays as an immediate cue when you open a distracting app</li>
+          <li>Time debt: distractions create time owed that you make up by studying</li>
+          <li>Automatic time blocking with Pomodoro-style breaks, plus app redirection during work time</li>
+          <li>Friend connection: comparing results adds mild guilt that motivates repair</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="row stack reveal" aria-label="Final design">
+      <h2>Final design</h2>
+      <figure class="figure">
+        <img src="img/ff-final.webp" alt="Three phone screens: the Me and Friends tab with a study timer, a prompt asking if you really want to use TikTok, and the pet at full mood">
+      </figure>
+    </section>
+
+    <section class="row plain reveal" aria-label="Outcome">
+      <h2>Outcome</h2>
+      <p>Presented findings to peers and instructors.</p>
+    </section>
+
+    <a class="next" href="bright-maps.html" data-wipe="#a6b8a7"><small>Next project</small>Bright Maps</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
