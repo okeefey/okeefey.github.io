@@ -168,3 +168,5 @@ a.card:hover .dim, a.card:focus-visible .dim, a.card:hover .nm, a.card:focus-vis
 .c-hint { color: var(--yellow); opacity: .85; }
 .m-logo { display: block; line-height: 0; } .m-logo img { display: block; height: 42px; width: auto; transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1); } .m-logo:hover img { transform: rotate(-6deg) scale(1.06); }
 .m-logo img { height: 52px; }
+@media (max-width: 960px) { .links { grid-template-columns: repeat(2, minmax(0, 1fr)); } } @media (max-width: 620px) { .links { grid-template-columns: 1fr; } }
+@media (min-width: 961px) { .links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
