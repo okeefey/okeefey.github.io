@@ -59,3 +59,14 @@ a { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) { .js .reveal, .js .reveal.in { transition: none; opacity: 1; transform: none; } }
 .s-title, .row h2, .next { font-weight: 800; } .s-lede, .facts dt, .next small { font-weight: 500; }
+
+.screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.screen { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.screen .ph { display: grid; place-items: center; padding: clamp(14px, 2vw, 26px); border-radius: 12px; background: linear-gradient(160deg, #f6efe9, #e3eadf); }
+.screen img { display: block; width: auto; max-width: 100%; max-height: 420px; transition: transform 0.6s var(--ease); }
+.screen:hover img { transform: translateY(-4px) scale(1.02); }
+.screen figcaption { font-size: 13.5px; line-height: 1.45; color: #d6e4d8; }
+.screen figcaption b { display: block; margin-bottom: 3px; font-size: 15px; font-weight: 800; color: var(--ink); }
+@media (max-width: 720px) { .screens { grid-template-columns: 1fr; } .screen img { max-height: 380px; } }
+.screen .ph { aspect-ratio: 4 / 5; } .screen .ph img { height: 100%; max-height: none; object-fit: contain; }
+.screen .ph { position: relative; display: block; } .screen .ph img { position: absolute; inset: clamp(14px, 2vw, 26px); width: calc(100% - 2 * clamp(14px, 2vw, 26px)); height: calc(100% - 2 * clamp(14px, 2vw, 26px)); object-fit: contain; }
