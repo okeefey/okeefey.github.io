@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0e0f19">
   <title>Owen O'Keefe | UX Designer</title>
   <meta name="description" content="Emerging UX designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.">
-  <link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="sheet.css">
+  <link rel="preload" href="fonts/funnel-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/funnel-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="modern.css">
   <script>
     document.documentElement.classList.add('js');
     try {
@@ -18,123 +17,182 @@
     } catch (e) {}
   </script>
 </head>
-<body class="sheet">
+<body class="modern">
   <div class="wipe" aria-hidden="true"></div>
-  <main class="sheet-wrap" id="top">
-    <div class="s-top">
-      <nav aria-label="Sections"><a href="#work">Selected work</a><a href="#other">Other work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-    </div>
+  <div class="m-wrap" id="top">
+    <header class="m-nav">
+      <a class="m-logo" href="#top" aria-label="Owen O'Keefe, home"><img src="img/logo.png" alt="" width="59" height="52"></a>
+      <nav aria-label="Sections"><a href="#journal">Journal</a><a href="#work-h">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    </header>
 
-    <h1 class="s-title">Owen O’Keefe</h1>
-    <hr class="s-rule">
-    <p class="s-lede">Emerging UX Designer. Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.</p>
+    <section class="m-hero">
+      <h1 class="m-name">Owen O’Keefe</h1>
+      <p class="m-tag">Emerging UX designer. Thoughtful tools for real people.</p>
+      <p class="m-note">Master of Information (UX Design) at the University of Toronto, with a background in psychology and computer science.</p>
+    </section>
 
-    
-    <section class="spread" aria-label="Contents">
+    <section id="journal" aria-label="Journal">
+    <div class="desk book" id="book">
+    <div class="bookwrap">
+      <button class="cover" id="cover" type="button" aria-controls="spread" aria-label="Open the journal">
+        <span class="face front">
+          <span class="label"><span class="c-title">Owen<br>O’Keefe</span><span class="c-sub">UX portfolio</span></span>
+          <span class="c-hint">Open the journal</span>
+        </span>
+        <span class="face back"></span>
+      </button>
+<section class="spread" id="spread" aria-label="Contents">
+      
       <div class="page pl">
-        <p class="book-t">Owen O’Keefe’s Portfolio <span>a book of selected work</span></p>
+        <p class="book-t">Contents <span>selected work, in order</span></p>
         <ol class="ix-list">
-          <li><a class="ix top" href="#about"><i>1.</i>About</a></li>
-          <li><a class="ix top" href="#work"><i>2.</i>Selected work</a>
+          <li><a class="ix" href="#about"><i>1.</i><b>About</b><span class="lead"></span><span class="pn">3</span></a></li>
+          <li><a class="ix" href="#work-h"><i>2.</i><b>Selected work</b><span class="lead"></span><span class="pn">5</span></a>
             <ol>
-              <li><a class="ix" href="bright-maps.html" data-wipe="#a6b8a7" data-img="img/bm-sketch.webp" data-n="(1 / 2)" data-name="Bright Maps" data-cap="Bright Maps, 2024" data-alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><i>2.1.</i>Bright Maps</a></li>
-              <li><a class="ix" href="focus-friend.html" data-wipe="#c4a0ac" data-img="img/focus-tile.webp" data-n="(2 / 2)" data-name="Focus Friend" data-cap="Focus Friend, 2025" data-alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><i>2.2.</i>Focus Friend</a></li>
+              <li><a class="ix" href="bright-maps.html" data-wipe="#0e0f19" data-img="img/bm-sketch.webp" data-n="p. 6" data-name="Bright Maps" data-cap="Bright Maps" data-blurb="Civic platform where residents vote on local services." data-meta="Team of 3 | Sept - Dec 2024 | Prototyping + User Interviews" data-alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><i>2.1.</i><b>Bright Maps</b><span class="lead"></span><span class="pn">6</span></a></li>
+              <li><a class="ix" href="focus-friend.html" data-wipe="#0e0f19" data-img="img/focus-tile.webp" data-n="p. 9" data-name="Focus Friend" data-cap="Focus Friend" data-blurb="Gamified focus app using a pet’s mood and time debt to curb phone distraction, built on the CREATE behaviour-change model." data-meta="Team of 3 | Oct - Dec 2025 | Figma" data-alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><i>2.2.</i><b>Focus Friend</b><span class="lead"></span><span class="pn">9</span></a></li>
             </ol></li>
-          <li><a class="ix top" href="#other"><i>3.</i>Other work</a>
+          <li><a class="ix" href="#other"><i>3.</i><b>Other work</b><span class="lead"></span><span class="pn">12</span></a>
             <ol>
-              <li><a class="ix" href="https://github.com/okeefey"><i>3.1.</i>Weather Tower</a></li>
-              <li><a class="ix" href="https://github.com/okeefey"><i>3.2.</i>MIDI Generator</a></li>
+              <li><a class="ix" href="https://github.com/okeefey"><i>3.1.</i><b>Weather Tower</b><span class="lead"></span><span class="pn">13</span></a></li>
+              <li><a class="ix" href="https://github.com/okeefey"><i>3.2.</i><b>MIDI Generator</b><span class="lead"></span><span class="pn">14</span></a></li>
             </ol></li>
-          <li><a class="ix top" href="#contact"><i>4.</i>Contact</a></li>
+          <li><a class="ix" href="#contact"><i>4.</i><b>Contact</b><span class="lead"></span><span class="pn">15</span></a></li>
         </ol>
+        
       </div>
       <div class="page pr">
-        <span class="pg-n" id="pgn">(1 / 2)</span>
-        <a class="pic book-pic" id="bookpic" href="bright-maps.html" data-wipe="#a6b8a7" aria-label="Open the Bright Maps case study">
-          <span class="box"><img id="bookimg" src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm" id="booknm">Bright Maps<i>Open the case study</i></span></span>
+        <span class="pg-n book-swap" id="pgn">p. 6</span>
+        <div class="pr-in">
+          <a class="pic book-pic" id="bookpic" href="bright-maps.html" data-wipe="#0e0f19" aria-label="Open the Bright Maps case study">
+            <span class="box"><img class="book-swap" id="bookimg" src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm" id="booknm">Bright Maps<i>Open the case study</i></span></span>
+          </a>
+          <p class="book-cap book-swap" id="bookcap">Bright Maps</p>
+          <p class="book-blurb book-swap" id="bookblurb">Civic platform where residents vote on local services.</p>
+          <p class="book-meta book-swap" id="bookmeta">Team of 3 | Sept - Dec 2024 | Prototyping + User Interviews</p>
+          <a class="book-open" id="bookopen" href="bright-maps.html" data-wipe="#0e0f19">Open the case study</a>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+    <button class="close-book" id="closebook" type="button">Close the book</button>
+  </div>
+
+    
+    </section>
+
+    <h2 class="m-h" id="work-h" style="margin-top:clamp(56px,8vw,100px)"><small>work</small>Selected work</h2>
+    <section id="work" aria-label="Work">
+      <div class="m-bar">
+        <div class="chips" role="group" aria-label="Filter work">
+          <button class="chip on" type="button" data-f="all">All</button>
+          <button class="chip" type="button" data-f="case">Case studies</button>
+          <button class="chip" type="button" data-f="other">Other work</button>
+        </div>
+        <label class="m-search"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg><input id="q" type="search" placeholder="Search work" aria-label="Search work"></label>
+      </div>
+
+      <div class="grid" id="grid">
+        <a class="card reveal" data-k="case" data-t="bright maps civic platform vote local services prototyping interviews" href="bright-maps.html" data-wipe="#0e0f19" aria-label="Open the Bright Maps case study">
+          <span class="thumb"><img src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm"><b>Bright Maps</b><i>Open the case study</i></span></span>
+          <span class="c-meta">Team of 3 · Sept - Dec 2024</span>
+          <span class="c-row"><b>Bright Maps</b><span>Case study</span></span>
+          <span class="c-blurb">Civic platform where residents vote on local services.</span>
         </a>
-        <p class="book-cap" id="bookcap">Bright Maps, 2024</p>
+        <a class="card reveal" data-k="case" data-t="focus friend gamified focus app pet mood time debt create behaviour figma" href="focus-friend.html" data-wipe="#0e0f19" aria-label="Open the Focus Friend case study">
+          <span class="thumb fill"><img src="img/focus-tile.webp" alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><span class="dim"></span><span class="nm"><b>Focus Friend</b><i>Open the case study</i></span></span>
+          <span class="c-meta">Team of 3 · Oct - Dec 2025</span>
+          <span class="c-row"><b>Focus Friend</b><span>Case study</span></span>
+          <span class="c-blurb">Gamified focus app using a pet's mood and time debt to curb phone distraction.</span>
+        </a>
+        <a class="card reveal" id="other" data-k="other" data-t="weather tower tower defense game godot weather systems uvic game development club" href="https://github.com/okeefey" aria-label="Weather Tower on GitHub">
+          <span class="thumb"><svg viewBox="0 0 200 200" fill="none" stroke="#101018" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect width="200" height="200" fill="#f8f7f5" stroke="none"/><path d="M62 150V96h76v54z" fill="#fff"/><path d="M62 96l-6-8h88l-6 8M70 88v-10h10v10M95 88v-10h10v10M120 88v-10h10v10" fill="#fff"/><rect x="90" y="122" width="20" height="28" rx="10" fill="#f8c7cc"/><path d="M40 150h120"/><path d="M60 56a18 18 0 0 1 34-6 14 14 0 0 1 24 8 12 12 0 0 1 0 0H62a8 8 0 0 1-2-2z" fill="#fff"/><path d="M78 68l-4 10M94 68l-4 10M110 68l-4 10" stroke="#57886c"/></svg></span>
+          <span class="c-meta">UVic Game Development Club · 2024-25</span>
+          <span class="c-row"><b>Weather Tower</b><span>Link ↗</span></span>
+          <span class="c-blurb">Tower defense game with dynamic weather systems, built in Godot.</span>
+        </a>
+        <a class="card reveal" data-k="other" data-t="midi generator deep learning music" href="https://github.com/okeefey" aria-label="MIDI Generator on GitHub">
+          <span class="thumb"><svg viewBox="0 0 200 200" fill="none" stroke="#101018" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect width="200" height="200" fill="#f8f7f5" stroke="none"/><rect x="34" y="104" width="132" height="52" rx="6" fill="#fff"/><path d="M60 104v52M86 104v52M112 104v52M138 104v52"/><rect x="52" y="104" width="14" height="30" fill="#101018"/><rect x="104" y="104" width="14" height="30" fill="#101018"/><rect x="130" y="104" width="14" height="30" fill="#101018"/><path d="M40 70c10 0 10-24 20-24s10 36 20 36 10-44 20-44 10 52 20 52 10-30 20-30 10 14 20 14" stroke="#57886c"/></svg></span>
+          <span class="c-meta">Deep learning</span>
+          <span class="c-row"><b>MIDI Generator</b><span>Link ↗</span></span>
+          <span class="c-blurb">Generates music as MIDI using deep learning.</span>
+        </a>
+        <p class="empty" id="empty">Nothing matches that search.</p>
       </div>
     </section>
 
-    <h2 class="s-h" id="work">Selected work</h2>
-    <p class="s-sub">hover a drawing to peek</p>
-
-    <article class="proj reveal">
-      <h3 class="proj-name">Bright Maps</h3>
-      <div class="proj-grid">
-        <div>
-          <a class="pic" href="bright-maps.html" data-wipe="#a6b8a7" aria-label="Open the Bright Maps case study">
-            <span class="box"><img src="img/bm-sketch.webp" alt="Hand-drawn wireframe sketch of the Bright Maps reporting form on a map"><span class="dim"></span><span class="nm">Bright Maps<i>Open the case study</i></span></span>
-          </a>
-          <p class="cap">wireframe sketch, reporting form</p>
-        </div>
-        <div class="txt">
-          <h3>Overview</h3>
-          <p>Civic platform where residents vote on local services.</p>
-          <div class="proj-facts"><div><b>Timeline</b>Sept - Dec 2024</div><div><b>Team</b>Team of 3</div><div><b>Method</b>Prototyping + User Interviews</div></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="proj flip reveal">
-      <h3 class="proj-name">Focus Friend</h3>
-      <div class="proj-grid">
-        <div class="txt">
-          <h3>Overview</h3>
-          <p>Gamified focus app using a pet's mood and time debt to curb phone distraction, built on the CREATE behaviour-change model.</p>
-          <div class="proj-facts"><div><b>Timeline</b>Oct - Dec 2025</div><div><b>Team</b>Team of 3</div><div><b>Tools</b>Figma</div></div>
-        </div>
-        <div>
-          <a class="pic" href="focus-friend.html" data-wipe="#c4a0ac" aria-label="Open the Focus Friend case study">
-            <span class="box"><img src="img/focus-tile.webp" alt="Focus Friend app cover with a grey 3D pet and a focus streak card"><span class="dim"></span><span class="nm">Focus Friend<i>Open the case study</i></span></span>
-          </a>
-          <p class="cap">app cover, pet and focus streak</p>
-        </div>
-      </div>
-    </article>
-
-    <h2 class="s-h" id="other">Other work</h2>
-    <ul class="rows">
-      <li><a href="https://github.com/okeefey"><b>Weather Tower</b><span>Tower defense game with dynamic weather systems, built in Godot (UVic Game Development Club, 2024-25)</span><em>Link ↗</em></a></li>
-      <li><a href="https://github.com/okeefey"><b>MIDI Generator</b><span>Using deep learning</span><em>Link ↗</em></a></li>
-    </ul>
-
-    <h2 class="s-h" id="about">About</h2>
-    <div class="cols">
+    <h2 class="m-h" id="about"><small>01 / about</small>About</h2>
+    <div class="panel about reveal">
       <p>Emerging UX designer pursuing a Master of Information in User Experience Design at the University of Toronto, with a background in psychology and computer science.</p>
       <p>I enjoy usability testing, prototyping, and human-centered design, and I want to bring research-grounded design thinking to a UX or product design team.</p>
     </div>
 
-    <h2 class="s-h" id="contact">Contact</h2>
-    <div class="s-facts" style="border-bottom:0;margin-top:26px">
-      <div><b>Email</b><a href="mailto:okeefeowen1@gmail.com">okeefeowen1@gmail.com</a></div>
-      <div><b>LinkedIn</b><a href="https://linkedin.com/in/owenokeefe1">linkedin.com/in/owenokeefe1</a></div>
-      <div><b>GitHub</b><a href="https://github.com/okeefey">github.com/okeefey</a></div>
+    <h2 class="m-h" id="contact"><small>02 / contact</small>Contact</h2>
+    <div class="links">
+      <a class="link" href="mailto:okeefeowen1@gmail.com"><small>Email</small><b>okeefeowen1@gmail.com</b></a>
+      <a class="link" href="https://linkedin.com/in/owenokeefe1"><small>LinkedIn</small><b>linkedin.com/in/owenokeefe1</b></a>
+      <a class="link" href="https://github.com/okeefey"><small>GitHub</small><b>github.com/okeefey</b></a>
     </div>
 
-    <div class="s-foot"><span>Owen O’Keefe</span><span>built in 2026</span></div>
-  </main>
+    <div class="m-foot"><span>Owen O’Keefe</span><span>built in 2026</span></div>
+  </div>
 
   <script src="script.js"></script>
-
   <script>
     (function () {
-      var img = document.getElementById("bookimg"), cap = document.getElementById("bookcap"), nm = document.getElementById("booknm"), pic = document.getElementById("bookpic");
-      var links = document.querySelectorAll(".ix[data-img]"), cache = [];
-      links.forEach(function (a) { var i = new Image(); i.src = a.dataset.img; cache.push(i); });
+      var book = document.getElementById("book"), cover = document.getElementById("cover"), closeBtn = document.getElementById("closebook");
+      if (!book) return;
+      function set(open, instant) {
+        if (instant) book.classList.add("no-anim");
+        book.classList.toggle("open", open);
+        cover.tabIndex = open ? -1 : 0;
+        document.getElementById("spread").setAttribute("aria-hidden", open ? "false" : "true");
+        try { sessionStorage.setItem("bookOpen", open ? "1" : "0"); } catch (e) {}
+        if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { book.classList.remove("no-anim"); }); });
+      }
+      var was = false; try { was = sessionStorage.getItem("bookOpen") === "1"; } catch (e) {}
+      set(was, true);
+      cover.addEventListener("click", function () { set(true); });
+      var ob = document.getElementById("openbtn"); if (ob) ob.addEventListener("click", function () { set(true); book.scrollIntoView({ behavior: "smooth", block: "center" }); });
+      closeBtn.addEventListener("click", function () { set(false); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var img = document.getElementById("bookimg"), pic = document.getElementById("bookpic"), open = document.getElementById("bookopen");
+      var el = { cap: "bookcap", blurb: "bookblurb", meta: "bookmeta", n: "pgn" };
+      Object.keys(el).forEach(function (k) { el[k] = document.getElementById(el[k]); });
+      var nm = document.getElementById("booknm");
+      var links = document.querySelectorAll(".ix[data-img]");
+      links.forEach(function (a) { var i = new Image(); i.src = a.dataset.img; });
+      var cur = links[0];
       function show(a) {
-        if (img.getAttribute("src") === a.dataset.img) return;
-        img.style.opacity = 0;
+        if (a === cur) return; cur = a;
+        document.querySelectorAll(".book-swap").forEach(function (x) { x.style.opacity = 0; });
         setTimeout(function () {
-          img.src = a.dataset.img; img.alt = a.dataset.alt; cap.textContent = a.dataset.cap; document.getElementById("pgn").textContent = a.dataset.n;
-          nm.firstChild.nodeValue = a.dataset.name; pic.href = a.href; pic.setAttribute("data-wipe", a.getAttribute("data-wipe"));
-          pic.setAttribute("aria-label", "Open the " + a.dataset.name + " case study"); img.style.opacity = 1;
+          img.src = a.dataset.img; img.alt = a.dataset.alt; el.cap.textContent = a.dataset.cap; el.blurb.textContent = a.dataset.blurb; el.meta.textContent = a.dataset.meta; el.n.textContent = a.dataset.n;
+          nm.firstChild.nodeValue = a.dataset.name;
+          [pic, open].forEach(function (x) { x.href = a.href; x.setAttribute("data-wipe", a.getAttribute("data-wipe")); });
+          pic.setAttribute("aria-label", "Open the " + a.dataset.name + " case study");
+          document.querySelectorAll(".book-swap").forEach(function (x) { x.style.opacity = 1; });
         }, 160);
         document.querySelectorAll(".ix.on").forEach(function (x) { x.classList.remove("on"); }); a.classList.add("on");
       }
       links.forEach(function (a) { a.addEventListener("mouseenter", function () { show(a); }); a.addEventListener("focus", function () { show(a); }); });
       if (links[0]) links[0].classList.add("on");
+    })();
+  </script>
+  <script>
+    (function () {
+      var chips = document.querySelectorAll(".chip"), cards = document.querySelectorAll("#grid .card"), q = document.getElementById("q"), empty = document.getElementById("empty"), f = "all";
+      function apply() {
+        var s = q.value.trim().toLowerCase(), n = 0;
+        cards.forEach(function (c) { var ok = (f === "all" || c.dataset.k === f) && (!s || c.dataset.t.indexOf(s) > -1); c.hidden = !ok; if (ok) n++; });
+        empty.style.display = n ? "none" : "block";
+      }
+      chips.forEach(function (b) { b.addEventListener("click", function () { f = b.dataset.f; chips.forEach(function (x) { x.classList.toggle("on", x === b); }); apply(); }); });
+      q.addEventListener("input", apply);
     })();
   </script>
 </body>
