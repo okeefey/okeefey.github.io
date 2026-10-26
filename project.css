@@ -70,3 +70,9 @@ a { color: inherit; }
 @media (max-width: 720px) { .screens { grid-template-columns: 1fr; } .screen img { max-height: 380px; } }
 .screen .ph { aspect-ratio: 4 / 5; } .screen .ph img { height: 100%; max-height: none; object-fit: contain; }
 .screen .ph { position: relative; display: block; } .screen .ph img { position: absolute; inset: clamp(14px, 2vw, 26px); width: calc(100% - 2 * clamp(14px, 2vw, 26px)); height: calc(100% - 2 * clamp(14px, 2vw, 26px)); object-fit: contain; }
+
+/* embedded prototype */
+.demo-wrap { margin-top: 14px; }
+.demo { display: block; width: 100%; height: clamp(520px, 62vw, 720px); border: 0; border-radius: 14px; background: #d9d3c7; }
+.demo-note { margin: 10px 0 0; font-size: 13.5px; color: #d6e4d8; }
+.demo-note a { color: var(--yellow); }

@@ -1,0 +1,691 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Petalfall</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sketchbook page. Thin header, the drawing fills the sheet, small annotations sit on the paper like plate notes. */
+:root{
+  --desk:#d9d3c7; --edge:#c9c2b4; --paper:#eeebe4; --paper2:#e6e2d9; --graphite:#2d2c2a; --ink:#262522; --muted:#6a665e; --line:#cbc5b9; --surface:#f7f5f0;
+  --accent:#9e3f63; --accent-ink:#fbf7f2;
+  --art:#dd8fae; --fact:#e2b94f; --place:#86b78f; --grain:0,0,0;
+  --shadow:0 16px 40px -18px rgba(40,34,26,.4);
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#111112; --edge:#2e2e31; --paper:#1d1d1f; --paper2:#232326; --graphite:#d8d4cb; --ink:#ebe8e1; --muted:#a29d93; --line:#3a3936; --surface:#262628;
+  --accent:#e58bad; --accent-ink:#1d1418;
+  --art:#e597b7; --fact:#e8c460; --place:#93c49c; --grain:255,255,255;
+  --shadow:0 16px 40px -18px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#111112; --edge:#2e2e31; --paper:#1d1d1f; --paper2:#232326; --graphite:#d8d4cb; --ink:#ebe8e1; --muted:#a29d93; --line:#3a3936; --surface:#262628;
+  --accent:#e58bad; --accent-ink:#1d1418;
+  --art:#e597b7; --fact:#e8c460; --place:#93c49c; --grain:255,255,255;
+  --shadow:0 16px 40px -18px rgba(0,0,0,.8); color-scheme:dark}
+
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--desk);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;overflow:hidden}
+.app{height:100%;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--desk);position:relative;z-index:2}
+.brand{display:flex;align-items:baseline;gap:12px;margin-right:auto;min-width:0}
+.brand h1{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:0;letter-spacing:.01em}
+.brand .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.btn{font:600 .9rem var(--body);border-radius:6px;padding:8px 14px;border:1.5px solid var(--graphite);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:var(--paper2)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.07);background:var(--accent)}
+.btn:focus-visible,.chip:focus-visible,.seg label:focus-within,input:focus-visible,textarea:focus-visible,.item:focus-visible,.close:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.count{font-family:var(--mono);font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:0 7px;font-variant-numeric:tabular-nums}
+
+.stage{flex:1;min-height:0;display:flex;padding-block:4px 22px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* the drawing sheet, with two sheets peeking out underneath */
+.sheet{position:relative;flex:1;min-width:0;background:var(--paper);border-radius:6px;
+  box-shadow:4px 4px 0 -1px var(--paper2),4px 4px 0 0 var(--edge),8px 8px 0 -1px var(--paper2),8px 8px 0 0 var(--edge),0 18px 40px -22px rgba(0,0,0,.45)}
+.pageno{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.06em;pointer-events:none}
+canvas#tree{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:manipulation}
+.hint{position:absolute;left:22px;top:14px;font-family:var(--body);font-weight:600;font-size:.95rem;color:var(--accent);
+  white-space:nowrap;max-width:calc(100% - 32px);pointer-events:none;display:flex;align-items:center;gap:6px}
+.hint svg{width:34px;height:30px;flex:none}
+.caption{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;pointer-events:none;padding-inline:18px 18px}
+.caption .plate{font-family:var(--display);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center;flex:1}
+.caption .plate i{font-family:var(--mono);font-style:normal;font-size:.72rem;letter-spacing:.04em;text-transform:none}
+.ctrls{display:flex;gap:8px;pointer-events:auto}
+.season select{font:600 .9rem var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--graphite);border-radius:6px;padding:7px 10px;cursor:pointer}
+.season select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.legend{display:flex;gap:12px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:11px;height:11px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:inline-block;flex:none;box-shadow:inset 0 0 0 1px rgba(var(--grain),.25)}
+
+/* overlays */
+.scrim{position:fixed;inset:0;background:rgba(24,20,14,.38);display:flex;align-items:center;justify-content:center;z-index:20;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px}
+.card{background:var(--surface);color:var(--ink);border-radius:4px;box-shadow:var(--shadow);border:1px solid var(--line);width:100%;max-width:440px;max-height:100%;overflow:auto;
+  animation:rise .28s cubic-bezier(.2,.8,.2,1);position:relative}
+.card::before{content:"";position:absolute;top:-9px;left:50%;width:84px;height:20px;margin-left:-42px;background:rgba(var(--grain),.07);transform:rotate(-2deg);border:1px solid rgba(var(--grain),.06)}
+@keyframes rise{from{transform:translateY(14px) rotate(.6deg);opacity:0}}
+.card-head{display:flex;align-items:center;gap:10px;padding:20px 20px 0}
+.badge{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:3px;color:#22201c}
+.badge.art{background:var(--art)} .badge.fact{background:var(--fact)} .badge.place{background:var(--place)}
+.by{font-size:.85rem;color:var(--muted);margin-right:auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.close{border:1px solid var(--line);background:transparent;color:var(--ink);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem;line-height:1}
+.card-body{padding:14px 20px 4px;display:flex;flex-direction:column;gap:10px}
+.card-body h2{font-family:var(--display);font-weight:400;font-size:1.55rem;line-height:1.2;margin:0;text-wrap:balance}
+.fact-text{font-family:var(--display);font-size:1.45rem;line-height:1.3;text-wrap:balance;margin:6px 0}
+.art-frame{border:1px solid var(--line);padding:8px;background:var(--paper);aspect-ratio:4/3;max-width:100%;box-sizing:border-box}
+.art-frame canvas,.art-frame img{width:100%;height:100%;display:block;object-fit:cover}
+.note{color:var(--muted);margin:0}
+.coords{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.maplink{color:var(--accent);font-weight:600;text-decoration:none}
+.maplink:hover{text-decoration:underline}
+.card-foot{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:14px 20px 18px;flex-wrap:wrap}
+.small{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.sample{font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;border:1px dashed var(--muted);color:var(--muted);border-radius:3px;padding:1px 6px;white-space:nowrap}
+
+/* add form */
+form{display:flex;flex-direction:column;gap:14px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border:1px solid var(--line);padding:4px;border-radius:6px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{text-align:center;padding:8px 4px;border-radius:4px;cursor:pointer;font-weight:600;font-size:.88rem;display:flex;gap:6px;justify-content:center;align-items:center}
+.seg input:checked+label{background:var(--paper2);box-shadow:inset 0 0 0 1.5px var(--graphite)}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:.82rem;font-weight:600}
+.field .opt{font-weight:400;color:var(--muted)}
+input[type=text],textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:9px 12px;width:100%;box-sizing:border-box}
+textarea{resize:vertical;min-height:80px}
+input[type=file]{font-size:.85rem;color:var(--muted)}
+.counter{font-family:var(--mono);font-size:.72rem;color:var(--muted);align-self:flex-end;font-variant-numeric:tabular-nums}
+.err{color:var(--accent);font-size:.85rem;margin:0}
+
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--surface);z-index:15;box-shadow:var(--shadow);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px);
+  transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.drawer.open{transform:none}
+.drawer-head{display:flex;align-items:center;gap:10px;padding:16px 18px 10px}
+.drawer-head h2{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:0;margin-right:auto}
+.tabs,.chips{display:flex;gap:6px;padding:0 18px 10px;flex-wrap:wrap}
+.chip{font:600 .8rem var(--body);border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--graphite);color:var(--paper);border-color:var(--graphite)}
+.list{flex:1;overflow:auto;padding:4px 10px 18px;display:flex;flex-direction:column;gap:2px}
+.item{display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;padding:10px;border-radius:6px;cursor:pointer;border:0;background:transparent;color:var(--ink);text-align:left;font:inherit}
+.item:hover{background:var(--paper2)}
+.item .sw{margin-top:6px}
+.item b{font-weight:600;min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item small{color:var(--muted);font-size:.78rem}
+.empty{color:var(--muted);padding:24px 18px;font-size:.9rem}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--graphite);color:var(--paper);
+  padding:10px 16px;border-radius:6px;font-size:.9rem;z-index:30;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+
+@media (max-width:620px){
+.caption{padding-inline:18px 12px}.hint{left:20px}
+  .brand .meta,.legend,.caption .plate{display:none}
+  .caption{justify-content:space-between}
+  .btn{padding:8px 11px}
+}
+@media (prefers-reduced-motion:reduce){.card,.drawer{animation:none;transition:none}}
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>Petalfall</h1>
+      <span class="meta" id="metaLine">Prototype · sample petals</span>
+    </div>
+    <button class="btn" id="openDrawer" type="button">Petals <span class="count" id="fallenCount">0</span></button>
+    <button class="btn primary" id="openAdd" type="button">+ Add a petal</button>
+  </header>
+  <div class="stage"><div class="sheet" id="stage">
+    <canvas id="tree" aria-label="A pencil sketch of a tree. Coloured petals fall from it; select one to read it." role="img"></canvas>
+    <div class="hint" id="hint">
+      <span id="hintText">Catch a falling petal to read it</span>
+      <svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 4c10 1 20 7 26 20"/><path d="M22 21l7 4 1-8"/></svg>
+    </div>
+    <div class="caption">
+      <div class="ctrls"><button class="btn wind" id="wind" type="button" aria-pressed="false">Pause wind</button>
+        <label class="season"><span class="sr">Season</span><select id="season">
+          <option value="spring">Spring</option><option value="summer">Summer</option><option value="autumn">Autumn</option><option value="winter">Winter</option>
+        </select></label></div>
+      <div class="plate">Prunus communitas · <i id="plateCount">12 petals so far</i></div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw" style="background:var(--art)"></i>art</span>
+        <span><i class="sw" style="background:var(--fact)"></i>fact</span>
+        <span><i class="sw" style="background:var(--place)"></i>place</span>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="scrim" id="cardScrim" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="cardTitle" id="card"></div>
+</div>
+
+<div class="scrim" id="addScrim" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="card-head">
+      <h2 id="addTitle" style="font-family:var(--display);font-weight:400;font-size:1.45rem;margin:0;margin-right:auto">Add a petal</h2>
+      <button class="close" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <div class="card-body">
+      <form id="addForm" novalidate>
+        <div class="seg" role="radiogroup" aria-label="Petal type">
+          <input type="radio" name="ptype" id="t-art" value="art" checked><label for="t-art"><i class="sw" style="background:var(--art)"></i>Artwork</label>
+          <input type="radio" name="ptype" id="t-fact" value="fact"><label for="t-fact"><i class="sw" style="background:var(--fact)"></i>Fact</label>
+          <input type="radio" name="ptype" id="t-place" value="place"><label for="t-place"><i class="sw" style="background:var(--place)"></i>Place</label>
+        </div>
+        <div data-for="art" class="fields">
+          <div class="field"><label for="artTitle">Title</label><input type="text" id="artTitle" maxlength="60" placeholder="Rain on Bloor St."></div>
+          <div class="field" style="margin-top:12px"><label for="artFile">Image <span class="opt">(optional; we'll sketch one if you skip this)</span></label><input type="file" id="artFile" accept="image/*"></div>
+        </div>
+        <div data-for="fact" class="fields" hidden>
+          <div class="field"><label for="factText">Your fact</label><textarea id="factText" maxlength="200" placeholder="Sea otters hold hands while they sleep so they don't drift apart."></textarea><span class="counter" id="factCount">0 / 200</span></div>
+          <div class="field"><label for="factSource">Source <span class="opt">(optional)</span></label><input type="text" id="factSource" maxlength="80" placeholder="Vancouver Aquarium"></div>
+        </div>
+        <div data-for="place" class="fields" hidden>
+          <div class="field"><label for="placeName">Place</label><input type="text" id="placeName" maxlength="60" placeholder="Trinity Bellwoods Park"></div>
+          <div class="field" style="margin-top:12px"><label for="placeRegion">City or region <span class="opt">(optional)</span></label><input type="text" id="placeRegion" maxlength="60" placeholder="Toronto"></div>
+        </div>
+        <div class="field"><label for="note">Why it matters to you <span class="opt">(optional)</span></label><input type="text" id="note" maxlength="120" placeholder="One line visitors will see under your petal"></div>
+        <div class="field"><label for="author">Your name <span class="opt">(optional)</span></label><input type="text" id="author" maxlength="30" placeholder="Anonymous"></div>
+        <p class="err" id="formErr" hidden></p>
+        <div style="display:flex;justify-content:flex-end;gap:10px;padding-bottom:6px">
+          <button class="btn" type="button" data-close>Cancel</button>
+          <button class="btn primary" type="submit">Hang it on the tree</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<aside class="drawer" id="drawer" aria-label="Petals" aria-hidden="true">
+  <div class="drawer-head"><h2>Petals</h2><button class="close" type="button" id="closeDrawer" aria-label="Close petals">×</button></div>
+  <div class="tabs" role="group" aria-label="Which petals">
+    <button class="chip" type="button" data-tab="fallen" aria-pressed="true">Fallen</button>
+    <button class="chip" type="button" data-tab="all" aria-pressed="false">All on tree</button>
+  </div>
+  <div class="chips" role="group" aria-label="Filter by type">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">Everything</button>
+    <button class="chip" type="button" data-filter="art" aria-pressed="false">Art</button>
+    <button class="chip" type="button" data-filter="fact" aria-pressed="false">Facts</button>
+    <button class="chip" type="button" data-filter="place" aria-pressed="false">Places</button>
+  </div>
+  <div class="list" id="list"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(() => {
+const SAMPLE = [
+  {id:"s1",type:"art",title:"Morning on the Don Valley trail",author:"Mina",note:"Painted after a 6am run.",seed:11,days:3},
+  {id:"s2",type:"fact",text:"Octopuses have three hearts, and two of them stop beating while they swim.",source:"Smithsonian Ocean",author:"Theo",days:1},
+  {id:"s3",type:"place",name:"Philosopher's Path",region:"Kyoto, Japan",lat:35.0270,lng:135.7948,note:"The canal turns pink in early April.",author:"Ren",days:6},
+  {id:"s4",type:"art",title:"Static",author:"Jules",note:"Made from a glitched photo of my radiator.",seed:42,days:2},
+  {id:"s5",type:"fact",text:"A day on Venus is longer than a year on Venus.",source:"NASA",author:"Anonymous",days:4},
+  {id:"s6",type:"place",name:"Dallas Road cliffs",region:"Victoria, BC",lat:48.4078,lng:-123.3610,note:"Best place to watch storms roll in off the strait.",author:"Sam",days:8},
+  {id:"s7",type:"art",title:"Tile study #4",author:"Priya",note:"",seed:77,days:5},
+  {id:"s8",type:"fact",text:"Botanically, bananas are berries and strawberries are not.",source:"",author:"Lou",days:2},
+  {id:"s9",type:"place",name:"Philosopher's Walk",region:"Toronto, ON",lat:43.6675,lng:-79.3953,note:"Quiet shortcut between classes.",author:"Ada",days:1},
+  {id:"s10",type:"fact",text:"Toronto's PATH network has over 30 km of underground walkways.",source:"City of Toronto",author:"Kai",days:9},
+  {id:"s11",type:"place",name:"Riverdale Park East",region:"Toronto, ON",lat:43.6690,lng:-79.3540,note:"Skyline at sunset from the top of the hill.",author:"Noor",days:3},
+  {id:"s12",type:"art",title:"Kitchen window, February",author:"Eli",note:"Gouache, about 20 minutes.",seed:5,days:7}
+].map(p => ({...p, example:true, created: Date.now() - p.days*864e5}));
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let mine = store.get("petalfall-mine", []);
+let petals = [...SAMPLE, ...mine];
+let fallenIds = new Set();
+let seenHint = store.get("petalfall-hint", false);
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+let paused = reduce.matches;
+
+const stage = document.getElementById("stage");
+const cv = document.getElementById("tree");
+const ctx = cv.getContext("2d");
+let W=0,H=0,DPR=1, groundY=0;
+let segs=[], tips=[], blooms=[], falling=[], landed=[];
+let colors={}, sprites={};
+
+function readColors(){
+  const s=getComputedStyle(document.documentElement);
+  ["paper","graphite","art","fact","place","accent","grain"].forEach(k=>colors[k]=s.getPropertyValue("--"+k).trim());
+  buildSprites();
+}
+function rng(seed){let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16807%2147483647,(s-1)/2147483646)}
+
+// ---------- seasons ----------
+// foliage colours per season; the season follows today's date (northern hemisphere) unless the viewer picks one
+const SEASONS={
+  spring:{label:"Spring",leaves:["#f2b3c7","#e894b0","#f6cdd9","#d9799c"],density:1,shape:"petal",ground:.15},
+  summer:{label:"Summer",leaves:["#7fa865","#5d8c4b","#9cbf73","#4c7a3e"],density:1.1,shape:"leaf",ground:.1},
+  autumn:{label:"Autumn",leaves:["#e07a2e","#c9561f","#eda048","#b5421a","#d9922f"],density:.85,shape:"leaf",ground:.9},
+  winter:{label:"Winter",leaves:[],density:.25,shape:"petal",ground:0}
+};
+function seasonFor(d){const m=d.getMonth();return m<2||m===11?"winter":m<5?"spring":m<8?"summer":"autumn"}
+let season=seasonFor(new Date());
+
+// ---------- pencil primitives ----------
+function stroke(c,r,x1,y1,x2,y2,w,a,j){
+  c.globalAlpha=a; c.lineWidth=w; c.beginPath();
+  c.moveTo(x1+(r()-.5)*j,y1+(r()-.5)*j);
+  c.quadraticCurveTo((x1+x2)/2+(r()-.5)*j*2,(y1+y2)/2+(r()-.5)*j*2,x2+(r()-.5)*j,y2+(r()-.5)*j);
+  c.stroke();
+}
+function petalPath(c,s){
+  c.beginPath(); c.moveTo(0,s);
+  c.bezierCurveTo(-s*0.95,s*0.35,-s*0.85,-s*0.7,-s*0.18,-s);
+  c.lineTo(0,-s*0.72); c.lineTo(s*0.18,-s);
+  c.bezierCurveTo(s*0.85,-s*0.7,s*0.95,s*0.35,0,s); c.closePath();
+}
+function leafPath(c,s){
+  c.beginPath(); c.moveTo(0,s);
+  c.bezierCurveTo(-s*0.75,s*0.35,-s*0.6,-s*0.55,0,-s*1.05);
+  c.bezierCurveTo(s*0.6,-s*0.55,s*0.75,s*0.35,0,s); c.closePath();
+}
+// coloured-pencil sprite: hatched fill + graphite outline; petal or leaf shape
+function petalSprite(color,s,seed,shape){
+  const path=shape==="leaf"?leafPath:petalPath;
+  const pad=4, size=(s+pad)*2, c=document.createElement("canvas"), d=2;
+  c.width=c.height=size*d; const x=c.getContext("2d"); x.scale(d,d); x.translate(size/2,size/2);
+  const r=rng(seed);
+  x.save(); path(x,s); x.clip();
+  x.globalAlpha=.55; x.fillStyle=color; path(x,s); x.fill();
+  x.strokeStyle=color; x.lineCap="round";
+  for(let i=-s*2;i<s*2;i+=1.7) stroke(x,r,i-s,s+2,i+s,-s-2,1.1,.85,0.8);
+  x.strokeStyle=colors.graphite;
+  for(let i=0;i<6;i++) stroke(x,r,-s*.1+(r()-.5)*s*.4,s*.6,(r()-.5)*s*.5,-s*.3,.5,.18,1);
+  x.restore();
+  x.strokeStyle=colors.graphite; x.lineCap="round"; x.lineJoin="round";
+  for(let p=0;p<2;p++){x.save();x.translate((r()-.5)*.8,(r()-.5)*.8);x.globalAlpha=p?.35:.75;x.lineWidth=p?.6:.9;path(x,s);x.stroke();x.restore()}
+  if(shape==="leaf"){x.globalAlpha=.6;x.lineWidth=.6;stroke(x,r,0,s*.95,0,-s*.8,.6,.6,.6)}
+  return {c,size};
+}
+function buildSprites(){
+  ["art","fact","place"].forEach((t,i)=>{
+    const sh=SEASONS[season].shape;
+    sprites[t]={fall:petalSprite(colors[t],11,3+i,sh),big:petalSprite(colors[t],14,7+i,sh),bloom:petalSprite(colors[t],5.6,11+i,"petal")};
+  });
+}
+readColors();
+const reTheme=()=>{readColors();drawTreeLayer()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",reTheme);
+new MutationObserver(reTheme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+// ---------- tree ----------
+const treeLayer=document.createElement("canvas"), tctx=treeLayer.getContext("2d");
+function buildTree(){
+  const r=rng(23); segs=[]; tips=[];
+  groundY = H - Math.max(58, H*0.12);
+  const scale = Math.min(W*0.95, H*1.1);
+  const trunk = scale*0.19;
+  function br(x,y,a,len,wd,d){
+    // slight bend: split into two sub-segments
+    const bend=(r()-.5)*0.18;
+    const mx=x+Math.cos(a+bend)*len*.5, my=y+Math.sin(a+bend)*len*.5;
+    const x2=mx+Math.cos(a-bend)*len*.5, y2=my+Math.sin(a-bend)*len*.5;
+    segs.push({x,y,x2:mx,y2:my,w1:wd,w2:wd*.92,d});
+    segs.push({x:mx,y:my,x2,y2,w1:wd*.92,w2:wd*.84,d});
+    if(d>=8||len<scale*0.018){tips.push({x:x2,y:y2,a});return}
+    const n = d<1?2:(r()<0.32?3:2);
+    for(let i=0;i<n;i++){
+      const spread=(i-(n-1)/2)*(d<2?0.66:0.52);
+      br(x2,y2,a+spread+(r()-0.5)*0.4,len*(0.7+r()*0.12),wd*0.69,d+1);
+    }
+  }
+  br(W/2,groundY,-Math.PI/2+(r()-0.5)*0.06,trunk,Math.max(11,scale*0.056),0);
+  assignBlooms();
+  drawTreeLayer();
+}
+function assignBlooms(){
+  const sorted=[...tips].sort((a,b)=>a.x-b.x||a.y-b.y);
+  const prev=new Map(blooms.map(b=>[b.petal.id,b]));
+  blooms = petals.map((p,i)=>{
+    const t=sorted[Math.floor((i+0.5)*sorted.length/petals.length)] || sorted[0];
+    const old=prev.get(p.id);
+    return {x:t.x,y:t.y,petal:p,grow: old?old.grow:1, phase:i*1.7, rot:(i*2.39)%6.28};
+  });
+  document.getElementById("plateCount").textContent = SEASONS[season].label.toLowerCase()+" · "+petals.length+" petals so far ("+petals.filter(p=>p.example).length+" samples)";
+}
+function drawTreeLayer(){
+  if(!W) return;
+  treeLayer.width=W*DPR; treeLayer.height=H*DPR;
+  const c=tctx; c.setTransform(DPR,0,0,DPR,0,0); c.clearRect(0,0,W,H);
+  const r=rng(101);
+  // paper grain
+  c.fillStyle=`rgba(${colors.grain},1)`;
+  for(let i=0;i<W*H/55;i++){c.globalAlpha=r()*.05;c.fillRect(r()*W,r()*H,1,1)}
+  c.globalAlpha=1;
+  c.strokeStyle=colors.graphite; c.lineCap="round";
+  // ground: loose hatching
+  for(let i=0;i<46;i++){
+    const y=groundY+2+r()*r()*(H-groundY-24), span=(1-(y-groundY)/(H-groundY))*W*.42+40;
+    const cx=W/2+(r()-.5)*span*.6;
+    stroke(c,r,cx-span*(.2+r()*.3),y,cx+span*(.2+r()*.3),y+(r()-.5)*3,.7,.12+r()*.18,2);
+  }
+  stroke(c,r,W*.12,groundY+4,W*.88,groundY+2,1,.35,4);
+  // trunk shadow scribble
+  for(let i=0;i<30;i++){const x=W/2+(r()-.2)*70;stroke(c,r,x,groundY+3+r()*6,x+14,groundY-4+r()*6,.8,.35,1.5)}
+  // branches (tonal fill drawn on its own layer so overlaps don't darken the joints)
+  const fill=document.createElement("canvas"); fill.width=W*DPR; fill.height=H*DPR;
+  const fx=fill.getContext("2d"); fx.setTransform(DPR,0,0,DPR,0,0); fx.fillStyle=colors.graphite;
+  segs.forEach(s=>{
+    const dx=s.x2-s.x, dy=s.y2-s.y, len=Math.hypot(dx,dy)||1, nx=-dy/len, ny=dx/len;
+    if(s.w1>3.2){
+      const a=s.w1/2, b=s.w2/2;
+      // light tonal fill
+      fx.beginPath();
+      fx.moveTo(s.x+nx*a,s.y+ny*a); fx.lineTo(s.x2+nx*b,s.y2+ny*b); fx.lineTo(s.x2-nx*b,s.y2-ny*b); fx.lineTo(s.x-nx*a,s.y-ny*a); fx.fill();
+      fx.beginPath(); fx.arc(s.x2,s.y2,b,0,7); fx.fill();
+      // edges, darker on the right (shadow side)
+      for(let p=0;p<2;p++){
+        stroke(c,r,s.x+nx*a,s.y+ny*a,s.x2+nx*b,s.y2+ny*b,.9,.55,1.2);
+        stroke(c,r,s.x-nx*a,s.y-ny*a,s.x2-nx*b,s.y2-ny*b,1.2,.75,1.2);
+      }
+      // bark hatching on the shadow side
+      const n=Math.floor(len/2.6);
+      for(let i=0;i<n;i++){
+        const t=i/n, w=a+(b-a)*t, px=s.x+dx*t, py=s.y+dy*t;
+        const from=-w+r()*w*.2, to=-w*(.1+r()*.6);
+        stroke(c,r,px+nx*from,py+ny*from,px+nx*to+dx/len*3,py+ny*to+dy/len*3,.6,.3+r()*.25,.8);
+      }
+      // vertical bark lines
+      for(let k=0;k<Math.min(5,Math.floor(a/2));k++){const o=(r()-.5)*a*1.4;stroke(c,r,s.x+nx*o,s.y+ny*o,s.x2+nx*o*b/a,s.y2+ny*o*b/a,.5,.25,2)}
+    } else {
+      for(let p=0;p<2;p++) stroke(c,r,s.x,s.y,s.x2+(r()-.5),s.y2+(r()-.5),Math.max(.6,s.w1*.55),.5+r()*.25,.9);
+    }
+  });
+  c.save(); c.setTransform(1,0,0,1,0,0); c.globalAlpha=.15; c.drawImage(fill,0,0); c.restore();
+  // foliage: coloured-pencil marks in the season's palette, then graphite ticks, darker underneath
+  const S=SEASONS[season];
+  if(S.leaves.length){
+    tips.forEach(t=>{
+      const cx=t.x+Math.cos(t.a)*4, cy=t.y-4;
+      for(let i=0;i<Math.round(40*S.density);i++){
+        const ang=r()*6.28, rad=Math.sqrt(r()), x=cx+Math.cos(ang)*18*rad, y=cy+Math.sin(ang)*13*rad;
+        const dir=-0.9+(r()-.5)*1.4, l=3+r()*5;
+        c.strokeStyle=S.leaves[Math.floor(r()*S.leaves.length)];
+        stroke(c,r,x,y,x+Math.cos(dir)*l,y+Math.sin(dir)*l,1.6,.55+r()*.35,.8);
+      }
+    });
+    // fallen leaves gathered on the ground
+    for(let i=0;i<Math.round(160*S.ground);i++){
+      const x=W/2+(r()-.5)*W*.5*(.4+r()*.6), y=groundY+2+r()*r()*28;
+      c.strokeStyle=S.leaves[Math.floor(r()*S.leaves.length)];
+      stroke(c,r,x,y,x+3+r()*4,y+(r()-.5)*2,1.6,.5+r()*.4,.6);
+    }
+    c.strokeStyle=colors.graphite;
+  }
+  tips.forEach(t=>{
+    const cx=t.x+Math.cos(t.a)*4, cy=t.y-4, rx=13+r()*8, ry=9+r()*6;
+    for(let i=0;i<Math.round(34*Math.max(.35,S.density*.8));i++){
+      const ang=r()*6.28, rad=Math.sqrt(r());
+      const x=cx+Math.cos(ang)*rx*rad, y=cy+Math.sin(ang)*ry*rad;
+      const dir=-1.1+(r()-.5)*1.2, l=2.5+r()*4;
+      const under=y>cy+ry*.2;
+      stroke(c,r,x,y,x+Math.cos(dir)*l,y+Math.sin(dir)*l,.7,under?.55:.25+r()*.2,.6);
+    }
+    for(let i=0;i<(S.leaves.length?6:1);i++){ // little scribble loops
+      const x=cx+(r()-.5)*rx*1.4, y=cy+(r()-.5)*ry*1.2;
+      c.globalAlpha=.22; c.lineWidth=.6; c.beginPath(); c.ellipse(x,y,2+r()*2,1.5+r()*1.5,r()*3,0,6.28); c.stroke();
+    }
+  });
+  c.globalAlpha=1;
+}
+
+function drawSprite(sp,x,y,rot,scale,alpha){
+  ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(rot); ctx.scale(scale,scale);
+  ctx.drawImage(sp.c,-sp.size/2,-sp.size/2,sp.size,sp.size); ctx.restore();
+}
+function drawBlossom(b,t){
+  const g=b.grow<1?easeOut(b.grow):1;
+  const bob=reduce.matches?0:Math.sin(t/1100+b.phase)*1;
+  const sp=sprites[b.petal.type].bloom, hov=b===hoverBloom;
+  for(let i=0;i<5;i++){
+    const a=b.rot+i*Math.PI*2/5;
+    drawSprite(sp,b.x+Math.sin(a)*5.6*g,b.y+bob-Math.cos(a)*5.6*g,a,g*(hov?1.25:1),1);
+  }
+  ctx.fillStyle=colors.graphite; ctx.globalAlpha=.7; ctx.beginPath(); ctx.arc(b.x,b.y+bob,1.6*g,0,7); ctx.fill(); ctx.globalAlpha=1;
+  if(hov){ // pencil circle around it
+    ctx.strokeStyle=colors.accent; ctx.lineWidth=1.2; ctx.beginPath(); ctx.ellipse(b.x,b.y+bob,17,15,.3,0.3,6.5); ctx.stroke();
+  }
+}
+function easeOut(x){return 1-Math.pow(1-x,3)}
+
+// ---------- falling ----------
+let nextFall=1200, lastT=0, priority=null;
+function spawn(petal){
+  const b=blooms.find(x=>x.petal===petal) || blooms[Math.floor(Math.random()*blooms.length)];
+  if(!b) return;
+  falling.push({petal:b.petal,x:b.x,y:b.y,x0:b.x,vy:22+Math.random()*12,amp:22+Math.random()*26,ph:Math.random()*6,rot:Math.random()*6,vr:(Math.random()-0.5)*1.6,flip:Math.random()*6,age:0});
+}
+function pickPetal(){
+  const onScreen=new Set(falling.map(f=>f.petal.id));
+  const pool=petals.filter(p=>!onScreen.has(p.id));
+  const unfallen=pool.filter(p=>!fallenIds.has(p.id));
+  const src=unfallen.length?unfallen:pool;
+  return src[Math.floor(Math.random()*src.length)];
+}
+function step(dt){
+  blooms.forEach(b=>{if(b.grow<1)b.grow=Math.min(1,b.grow+dt/0.9)});
+  if(paused) return;
+  nextFall-=dt*1000;
+  if(nextFall<=0 && falling.length<7){
+    const p = priority || pickPetal(); priority=null;
+    if(p) spawn(p);
+    nextFall=1500+Math.random()*1300;
+  }
+  falling.forEach(f=>{
+    f.age+=dt; f.y+=f.vy*dt;
+    f.x=f.x0+Math.sin(f.age*1.3+f.ph)*f.amp + f.age*6;
+    f.rot+=f.vr*dt;
+    if(f.y>=groundY+2){f.done=true; landed.push({...f,y:groundY+4+Math.random()*10,life:7}); markFallen(f.petal)}
+  });
+  falling=falling.filter(f=>!f.done && f.x>-40 && f.x<W+40);
+  landed.forEach(l=>l.life-=dt); landed=landed.filter(l=>l.life>0);
+}
+function drawFalling(f,alpha,flat){
+  const sp=f===hoverFall?sprites[f.petal.type].big:sprites[f.petal.type].fall;
+  // fake 3D tumble by squashing one axis
+  ctx.save(); ctx.globalAlpha=alpha; ctx.translate(f.x,f.y); ctx.rotate(f.rot);
+  ctx.scale(flat?1:Math.max(.35,Math.abs(Math.cos(f.age*2+f.flip))),flat?.55:1);
+  ctx.drawImage(sp.c,-sp.size/2,-sp.size/2,sp.size,sp.size); ctx.restore();
+}
+function frame(t){
+  const dt=Math.min(0.05,(t-lastT)/1000||0); lastT=t;
+  step(dt);
+  ctx.setTransform(DPR,0,0,DPR,0,0); ctx.clearRect(0,0,W,H);
+  ctx.drawImage(treeLayer,0,0,W,H);
+  landed.forEach(l=>drawFalling(l,Math.min(1,l.life/1.5),true));
+  blooms.forEach(b=>drawBlossom(b,t));
+  falling.forEach(f=>drawFalling(f,1,false));
+  requestAnimationFrame(frame);
+}
+
+function resize(){
+  const r=stage.getBoundingClientRect(); W=r.width; H=r.height; DPR=Math.min(2,devicePixelRatio||1);
+  cv.width=W*DPR; cv.height=H*DPR; buildTree();
+}
+new ResizeObserver(resize).observe(stage);
+
+// ---------- hit testing ----------
+let hoverFall=null, hoverBloom=null;
+function hit(x,y){
+  for(let i=falling.length-1;i>=0;i--){const f=falling[i]; if(Math.hypot(f.x-x,f.y-y)<26) return {fall:f}}
+  for(const l of landed){ if(Math.hypot(l.x-x,l.y-y)<20) return {fall:l} }
+  let best=null,bd=20;
+  blooms.forEach(b=>{const d=Math.hypot(b.x-x,b.y-y); if(d<bd){bd=d;best=b}});
+  return best?{bloom:best}:null;
+}
+function pos(e){const r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]}
+cv.addEventListener("pointermove",e=>{
+  const h=hit(...pos(e)); hoverFall=h&&h.fall||null; hoverBloom=h&&h.bloom||null;
+  cv.style.cursor=h?"pointer":"default";
+});
+cv.addEventListener("pointerleave",()=>{hoverFall=hoverBloom=null});
+cv.addEventListener("click",e=>{
+  const h=hit(...pos(e)); if(!h) return;
+  if(h.fall){falling=falling.filter(f=>f!==h.fall); landed=landed.filter(l=>l!==h.fall); markFallen(h.fall.petal); openCard(h.fall.petal)}
+  else openCard(h.bloom.petal);
+});
+
+// ---------- hint ----------
+const hint=document.getElementById("hint");
+function updateHint(){
+  if(seenHint){hint.hidden=true;return}
+  document.getElementById("hintText").textContent = paused ? "Tap a blossom to read its petal" : "Catch a falling petal to read it";
+}
+
+// ---------- season ----------
+const seasonSel=document.getElementById("season");
+seasonSel.value=season;
+seasonSel.addEventListener("change",()=>{season=seasonSel.value;buildSprites();drawTreeLayer();assignBlooms()});
+
+// ---------- wind ----------
+const windBtn=document.getElementById("wind");
+function setWind(){windBtn.textContent=paused?"Start wind":"Pause wind";windBtn.setAttribute("aria-pressed",String(paused));updateHint()}
+windBtn.addEventListener("click",()=>{paused=!paused;setWind()});
+setWind();
+
+// ---------- fallen ----------
+function markFallen(p){if(!fallenIds.has(p.id)){fallenIds.add(p.id);document.getElementById("fallenCount").textContent=fallenIds.size;renderList()}}
+
+// ---------- card ----------
+const cardScrim=document.getElementById("cardScrim"), card=document.getElementById("card");
+let lastFocus=null;
+const LABEL={art:"artwork",fact:"fact",place:"place"};
+function ago(ts){const d=Math.round((Date.now()-ts)/864e5);return d<=0?"today":d===1?"yesterday":d+" days ago"}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function openCard(p){
+  lastFocus=document.activeElement;
+  if(!seenHint){seenHint=true;store.set("petalfall-hint",true);updateHint()}
+  let body="";
+  if(p.type==="art"){
+    body=`<div class="art-frame">${p.image?`<img src="${p.image}" alt="${esc(p.title)}">`:`<canvas width="480" height="360" aria-label="Artwork: ${esc(p.title)}"></canvas>`}</div>
+      <h2 id="cardTitle">${esc(p.title)}</h2>${p.note?`<p class="note">${esc(p.note)}</p>`:""}`;
+  } else if(p.type==="fact"){
+    body=`<p class="fact-text" id="cardTitle">${esc(p.text)}</p>${p.source?`<span class="small">Source · ${esc(p.source)}</span>`:""}${p.note?`<p class="note">${esc(p.note)}</p>`:""}`;
+  } else {
+    const q=encodeURIComponent([p.name,p.region].filter(Boolean).join(", "));
+    const href=p.lat!=null?`https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=15/${p.lat}/${p.lng}`:`https://www.openstreetmap.org/search?query=${q}`;
+    body=`<h2 id="cardTitle">${esc(p.name)}</h2>${p.region?`<span class="small">${esc(p.region)}</span>`:""}
+      ${p.note?`<p class="note">${esc(p.note)}</p>`:""}
+      ${p.lat!=null?`<span class="coords">${p.lat.toFixed(4)}°, ${p.lng.toFixed(4)}°</span>`:""}
+      <a class="maplink" href="${href}" target="_blank" rel="noopener">Open in map ↗</a>`;
+  }
+  card.innerHTML=`<div class="card-head"><span class="badge ${p.type}">${LABEL[p.type]}</span>${p.example?'<span class="sample">Sample</span>':""}<span class="by">by ${esc(p.author||"Anonymous")} · ${ago(p.created)}</span>
+    <button class="close" type="button" data-close aria-label="Close">×</button></div>
+    <div class="card-body">${body}</div>
+    <div class="card-foot"><span class="small">${p.example?"Sample content for this prototype, not a real contribution":"Your petal"}</span><button class="btn" type="button" id="another">Catch another</button></div>`;
+  const art=card.querySelector("canvas"); if(art) paintArt(art,p.seed||hash(p.id));
+  cardScrim.hidden=false;
+  const another=card.querySelector("#another"); another.focus();
+  another.onclick=()=>{const n=pickPetal();if(n){markFallen(n);openCard(n)}};
+}
+function hash(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h%9973+1}
+function closeOverlay(el){el.hidden=true; if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+cardScrim.addEventListener("click",e=>{if(e.target===cardScrim||e.target.closest("[data-close]"))closeOverlay(cardScrim)});
+
+// sketched artwork for example petals: graphite marks plus one colour wash
+function paintArt(c,seed){
+  const r=rng(seed*97), x=c.getContext("2d"), w=c.width, h=c.height;
+  const ink=colors.graphite, hue=Math.floor(r()*360);
+  x.clearRect(0,0,w,h); x.lineCap="round"; x.strokeStyle=ink;
+  // wash
+  x.globalAlpha=.35; x.fillStyle=`hsl(${hue},55%,62%)`;
+  x.beginPath(); x.ellipse(w*(.3+r()*.4),h*(.3+r()*.4),w*(.2+r()*.2),h*(.15+r()*.2),r()*3,0,7); x.fill();
+  const mode=seed%3;
+  if(mode===0){ // landscape: horizon hatching + hills
+    for(let i=0;i<70;i++){const y=h*.45+r()*h*.5;stroke(x,r,r()*w*.6,y,r()*w*.6+w*.4,y+(r()-.5)*4,1,.15+r()*.3,3)}
+    for(let k=0;k<3;k++){x.globalAlpha=.6;x.lineWidth=1.4;x.beginPath();x.moveTo(0,h*(.5+k*.08));for(let i=0;i<=10;i++)x.lineTo(i*w/10,h*(.5+k*.08)-Math.sin(i*.7+k+seed)*h*.06*(3-k));x.stroke()}
+  } else if(mode===1){ // scribbled forms
+    for(let i=0;i<14;i++){const cx=r()*w,cy=r()*h;for(let k=0;k<6;k++){x.globalAlpha=.25;x.lineWidth=1;x.beginPath();x.ellipse(cx+(r()-.5)*6,cy+(r()-.5)*6,10+r()*40,6+r()*24,r()*3,0,6.3);x.stroke()}}
+  } else { // tile study: hatched squares
+    const s=w/8;
+    for(let gx=0;gx<8;gx++)for(let gy=0;gy<6;gy++){
+      x.globalAlpha=.5;x.lineWidth=.8;x.strokeRect(gx*s+3,gy*s+3,s-6,s-6);
+      if(r()<.5){const dir=r()<.5;for(let i=4;i<s-4;i+=4)stroke(x,r,gx*s+(dir?i:4),gy*s+4,gx*s+(dir?4:i),gy*s+i,.7,.35,.6)}
+    }
+  }
+  x.globalAlpha=1;
+}
+
+// ---------- add flow ----------
+const addScrim=document.getElementById("addScrim"), form=document.getElementById("addForm"), err=document.getElementById("formErr");
+document.getElementById("openAdd").addEventListener("click",()=>{lastFocus=document.activeElement;addScrim.hidden=false;form.reset();err.hidden=true;showFields("art");document.getElementById("factCount").textContent="0 / 200";document.getElementById("artTitle").focus()});
+addScrim.addEventListener("click",e=>{if(e.target===addScrim||e.target.closest("[data-close]"))closeOverlay(addScrim)});
+function showFields(t){form.querySelectorAll(".fields").forEach(f=>f.hidden=f.dataset.for!==t)}
+form.querySelectorAll("input[name=ptype]").forEach(r=>r.addEventListener("change",()=>{showFields(r.value);err.hidden=true}));
+const factText=document.getElementById("factText");
+factText.addEventListener("input",()=>document.getElementById("factCount").textContent=factText.value.length+" / 200");
+
+function readImage(file){
+  return new Promise(res=>{
+    if(!file) return res(null);
+    const fr=new FileReader();
+    fr.onload=()=>{const img=new Image();img.onload=()=>{
+      const s=Math.min(1,640/Math.max(img.width,img.height)),c=document.createElement("canvas");
+      c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      res(c.toDataURL("image/jpeg",0.82))};img.onerror=()=>res(null);img.src=fr.result};
+    fr.onerror=()=>res(null); fr.readAsDataURL(file);
+  });
+}
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const type=form.querySelector("input[name=ptype]:checked").value;
+  const v=id=>document.getElementById(id).value.trim();
+  const p={id:"u"+Date.now(),type,author:v("author")||"Anonymous",note:v("note"),created:Date.now()};
+  if(type==="art"){p.title=v("artTitle"); if(!p.title) return fail("Give your artwork a title so people know what they're looking at.","artTitle");
+    p.image=await readImage(document.getElementById("artFile").files[0]); p.seed=Math.floor(Math.random()*9000)+1}
+  if(type==="fact"){p.text=v("factText"); if(p.text.length<10) return fail("Write your fact in at least 10 characters.","factText"); p.source=v("factSource")}
+  if(type==="place"){p.name=v("placeName"); if(!p.name) return fail("Name the place so visitors can find it.","placeName"); p.region=v("placeRegion")}
+  petals.push(p); mine.push(p); store.set("petalfall-mine",mine);
+  assignBlooms(); const b=blooms.find(x=>x.petal===p); if(b) b.grow=0;
+  priority=p; nextFall=Math.min(nextFall,2600);
+  closeOverlay(addScrim); renderList();
+  toast(paused?"Your petal is on the tree. Tap its blossom to see it.":"Your petal is on the tree. Watch for it to fall.");
+});
+function fail(msg,id){err.textContent=msg;err.hidden=false;document.getElementById(id).focus()}
+
+let toastT; function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3600)}
+
+// ---------- drawer ----------
+const drawer=document.getElementById("drawer"), list=document.getElementById("list");
+let tab="fallen", filter="all";
+document.getElementById("openDrawer").addEventListener("click",()=>{drawer.classList.add("open");drawer.setAttribute("aria-hidden","false");renderList();document.getElementById("closeDrawer").focus()});
+document.getElementById("closeDrawer").addEventListener("click",()=>{drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true");document.getElementById("openDrawer").focus()});
+drawer.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{tab=b.dataset.tab;drawer.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderList()}));
+drawer.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;drawer.querySelectorAll("[data-filter]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderList()}));
+function title(p){return p.type==="art"?p.title:p.type==="fact"?p.text:p.name}
+function renderList(){
+  let items=tab==="fallen"?petals.filter(p=>fallenIds.has(p.id)):petals.slice();
+  if(filter!=="all") items=items.filter(p=>p.type===filter);
+  items.sort((a,b)=>b.created-a.created);
+  if(!items.length){list.innerHTML=`<p class="empty">${tab==="fallen"?"Nothing has fallen yet. Petals collect here as the wind takes them, so you can find one you missed.":"No petals of this kind yet. Add the first one."}</p>`;return}
+  list.innerHTML=items.map(p=>`<button class="item" type="button" data-id="${p.id}"><i class="sw" style="background:var(--${p.type})"></i><span style="min-width:0"><b>${esc(title(p))}</b><small>${p.example?'<span class="sample">Sample</span> ':""}${LABEL[p.type]} · ${esc(p.author||"Anonymous")} · ${ago(p.created)}</small></span></button>`).join("");
+}
+list.addEventListener("click",e=>{const b=e.target.closest(".item");if(b){const p=petals.find(x=>x.id===b.dataset.id);markFallen(p);openCard(p)}});
+renderList();
+
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape")return;
+  if(!cardScrim.hidden)closeOverlay(cardScrim);
+  else if(!addScrim.hidden)closeOverlay(addScrim);
+  else if(drawer.classList.contains("open"))document.getElementById("closeDrawer").click();
+});
+
+requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
