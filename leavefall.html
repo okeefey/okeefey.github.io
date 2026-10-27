@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leavefall | Owen O'Keefe</title>
+  <meta name="description" content="Leavefall: a community tree where every falling leaf holds an artwork, a fact or a place.">
+  <link rel="stylesheet" href="project.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      var c = sessionStorage.getItem('wipe');
+      if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
+    } catch (e) {}
+  </script>
+</head>
+<body class="proj">
+  <div class="wipe" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <div class="s-top"><a href="index.html" data-wipe="#0e0f19">← Home</a><a href="bright-maps.html" data-wipe="#0e0f19">Next project →</a></div>
+
+    <header class="phead">
+      <h1 class="s-title">Leavefall</h1>
+      <hr class="s-rule">
+      <p class="s-lede">Community tree website</p>
+    </header>
+
+    <dl class="facts">
+      <div><dt>Role</dt><dd>UX designer, solo project</dd></div>
+      <div><dt>Timeline</dt><dd>2026</dd></div>
+      <div><dt>Tools</dt><dd>Figma, HTML / CSS / JS</dd></div>
+      <div><dt>Format</dt><dd>Interactive prototype</dd></div>
+    </dl>
+
+    <img class="shot" src="img/pf-hero.webp" alt="Pencil-sketch autumn tree with coloured leaves, and a few leaves drifting down">
+
+    <section class="row reveal" aria-label="Concept">
+      <h2>Concept</h2>
+      <p>A tree that sheds leaves. Each leaf holds something a visitor chose to share: an artwork, a random fact, or a place that matters to them. You catch a falling leaf to read it.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Goal">
+      <h2>Goal</h2>
+      <p>A calm, slow place to browse, where strangers leave small things for each other. It is a community version, so visitors can add their own leaves to the tree.</p>
+    </section>
+
+    <section class="row reveal" aria-label="Design decisions">
+      <h2>Design decisions</h2>
+      <div>
+        <ul>
+          <li>Sketchbook look: the tree is drawn in pencil on a paper sheet, with small notes set on the page like plate captions, so the drawing stays the focus</li>
+          <li>Three leaf types, each with its own colour: art (pink), fact (yellow), place (green), explained by a small legend</li>
+          <li>Catching leaves by hand: leaves drift down on their own, or tap a leaf on the tree to read it without waiting</li>
+          <li>Control and comfort: wind can be paused, motion respects the reduced-motion setting, and the tree changes with the season</li>
+          <li>A leaves drawer lists everything that has fallen, so a leaf you missed is easy to find again, with filters for art, facts and places</li>
+          <li>Adding is short: choose a type, fill one or two fields, add an optional note and name, and the new leaf grows on the tree and falls soon after</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="row stack reveal" aria-label="Key screens">
+      <h2>Key screens</h2>
+      <div class="screens">
+        <figure class="screen"><span class="ph"><img src="img/pf-card.webp" alt="Leaf card showing a sketched artwork called Static, with its author and a Catch another button" loading="lazy"></span><figcaption><b>Reading a leaf</b>A paper card, taped to the page, shows the leaf with its type, author and how long ago it was shared.</figcaption></figure>
+        <figure class="screen"><span class="ph"><img src="img/pf-list.webp" alt="Leaves drawer listing facts, places and artworks with colour-coded markers" loading="lazy"></span><figcaption><b>Leaves drawer</b>Every leaf in one list, switch between fallen and all on the tree, and filter by type.</figcaption></figure>
+        <figure class="screen"><span class="ph"><img src="img/pf-add.webp" alt="Add a leaf form with Artwork, Fact and Place options and a title field" loading="lazy"></span><figcaption><b>Add a leaf</b>One short form per leaf type. If you skip the image, a sketch is drawn for you.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="row stack reveal" aria-label="Try it">
+      <h2>Try the prototype</h2>
+      <div class="demo-wrap">
+        <iframe class="demo" src="leavefall-app.html" title="Leavefall interactive prototype" loading="lazy"></iframe>
+        <p class="demo-note">Sample leaves only. Leaves you add are saved in your own browser. <a href="leavefall-app.html" target="_blank" rel="noopener">Open full screen ↗</a></p>
+      </div>
+    </section>
+
+    <a class="next" href="bright-maps.html" data-wipe="#0e0f19"><small>Next project</small>Bright Maps</a>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
