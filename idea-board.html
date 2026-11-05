@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e0f19">
+  <title>Idea board | Owen O'Keefe</title>
+  <meta name="description" content="A pinboard of things Owen is sketching and prototyping.">
+  <link rel="preload" href="fonts/funnel-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="modern.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      var c = sessionStorage.getItem('wipe');
+      if (c) { sessionStorage.removeItem('wipe'); document.documentElement.style.setProperty('--wipe', c); document.documentElement.classList.add('entering'); }
+    } catch (e) {}
+  </script>
+</head>
+<body class="modern">
+  <div class="wipe" aria-hidden="true"></div>
+  <div class="m-wrap" id="top">
+    <header class="m-nav">
+      <a class="m-logo" href="index.html" data-wipe="#0e0f19" aria-label="Owen O'Keefe, home"><img src="img/logo.png" alt="" width="59" height="52"></a>
+      <nav aria-label="Sections"><a href="index.html#journal" data-wipe="#0e0f19">Journal</a><a href="index.html#work-h" data-wipe="#0e0f19">Work</a><a href="index.html#about" data-wipe="#0e0f19">About</a><a href="index.html#contact" data-wipe="#0e0f19">Contact</a><a href="idea-board.html" aria-current="page">Idea board</a></nav>
+    </header>
+
+    <section class="ib-head">
+      <h1 class="m-name">Idea board</h1>
+      <p class="m-note">Things I am sketching and prototyping, pinned up as they come.</p>
+    </section>
+
+    <section class="ib" aria-label="Pinned ideas">
+      <div class="ib-board">
+
+        <div class="ib-slot ib-s-main reveal"><a class="ib-note" href="leavefall.html" data-wipe="#0e0f19" aria-label="Open Leavefall">
+          <i class="ib-pin" aria-hidden="true"></i>
+          <span class="ib-pic"><img src="img/pf-tile.webp" alt="Pencil-sketch autumn tree with small coloured leaves"></span>
+          <span class="ib-main-body">
+            <span class="ib-title">Leavefall</span>
+            <span class="ib-lede">Community tree website</span>
+            <p>A tree that sheds leaves. Each leaf holds something a visitor chose to share: an artwork, a random fact, or a place that matters to them. You catch a falling leaf to read it.</p>
+            <span class="ib-tags"><b>Solo project</b><b>2026</b><b>Figma + prototype</b><b>Interactive</b></span>
+            <span class="ib-go">Open Leavefall</span>
+          </span>
+        </a></div>
+
+        <div class="ib-slot ib-s-side reveal"><div class="ib-side">
+        <div class="ib-s-goal"><div class="ib-note ib-pink">
+          <i class="ib-pin" aria-hidden="true"></i>
+          <h2>Goal</h2>
+          <p>A calm, slow place to browse, where strangers leave small things for each other. Visitors can add their own leaves to the tree.</p>
+        </div></div>
+
+        <div class="ib-s-try"><a class="ib-note ib-green" href="leavefall.html#try" data-wipe="#0e0f19">
+          <i class="ib-pin" aria-hidden="true"></i>
+          <h2>Try it</h2>
+          <p>Catch a falling leaf, or add your own<span class="ib-arrow">→</span></p>
+        </a></div>
+        </div></div>
+
+      </div>
+    </section>
+
+    <div class="m-foot"><a class="m-sc" href="https://soundcloud.com/okeefey" aria-label="Owen on SoundCloud" title="SoundCloud" target="_blank" rel="noopener"><svg viewBox="0 0 32 20" fill="currentColor" aria-hidden="true"><path d="M4 8v8M7 5v11M10 3v13M13 4v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M16 16V4.2c1.2-.9 2.7-1.4 4.2-1.4 3.6 0 6.5 2.6 6.9 6 .5-.2 1-.3 1.6-.3 2.2 0 4 1.8 4 4s-1.8 3.5-4 3.5z" transform="translate(-2 0) scale(.9 1)"/></svg></a></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
